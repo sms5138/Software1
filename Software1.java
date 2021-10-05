@@ -17,6 +17,5 @@ public class Software1 extends Application {
          primaryStage.setTitle("main page");
          primaryStage.setScene(new Scene(root, 640, 400));
          primaryStage.show();
-
       }
 }
