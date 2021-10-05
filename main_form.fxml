@@ -32,7 +32,10 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -47,11 +50,21 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="289.0" layoutX="22.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="289.0" layoutX="340.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="286.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="289.0" layoutX="22.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="289.0" layoutX="340.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="286.0" />
             <Label layoutX="33.0" layoutY="87.0" text="Parts" />
             <Label layoutX="347.0" layoutY="87.0" text="Products" />
             <Label layoutX="23.0" layoutY="33.0" text="Inventory Management System" />
+            <Button layoutX="142.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="191.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
+            <Button layoutX="257.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="451.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="500.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
+            <Button layoutX="566.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
+            <ListView layoutX="37.0" layoutY="123.0" prefHeight="200.0" prefWidth="269.0" />
+            <ListView layoutX="349.0" layoutY="123.0" prefHeight="200.0" prefWidth="269.0" />
+            <TextField layoutX="142.0" layoutY="92.0" promptText="Search by Part ID" />
+            <TextField layoutX="459.0" layoutY="92.0" promptText="Search by Product ID" />
       </children>
     </AnchorPane>
   </children>
