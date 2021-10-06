@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Software1.Controller">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -50,17 +50,17 @@
             <Label layoutX="33.0" layoutY="87.0" text="Parts" />
             <Label layoutX="347.0" layoutY="87.0" text="Products" />
             <Label layoutX="23.0" layoutY="33.0" text="Inventory Management System" />
-            <Button layoutX="142.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
-            <Button layoutX="191.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
-            <Button layoutX="257.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
-            <Button layoutX="451.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
-            <Button layoutX="500.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
-            <Button layoutX="566.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="partsAdd" onAction="#addPartsClick" layoutX="142.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="partsModify" layoutX="191.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
+            <Button fx:id="partsDelete" layoutX="257.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="productAdd" layoutX="451.0" layoutY="335.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="productModify" layoutX="500.0" layoutY="335.0" mnemonicParsing="false" text="Modify" />
+            <Button fx:id="productDelete" layoutX="566.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
             <ListView layoutX="37.0" layoutY="123.0" prefHeight="200.0" prefWidth="269.0" />
             <ListView layoutX="349.0" layoutY="123.0" prefHeight="200.0" prefWidth="269.0" />
             <TextField layoutX="142.0" layoutY="92.0" promptText="Search by Part ID" />
             <TextField layoutX="459.0" layoutY="92.0" promptText="Search by Product ID" />
-            <Button layoutX="593.0" layoutY="374.0" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="mainFormExit" layoutX="593.0" layoutY="374.0" mnemonicParsing="false" text="Exit" />
       </children>
     </AnchorPane>
   </children>

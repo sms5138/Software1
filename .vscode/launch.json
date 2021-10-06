@@ -6,17 +6,17 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
+            "name": "Launch Main",
             "request": "launch",
-            "mainClass": "${file}"
+            "vmArgs": "--module-path /Users/seansawyer/Documents/javafx-sdk-17.0.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Software1.Main",
+            "projectName": "Software1_46457112"
         },
         {
             "type": "java",
-            "name": "Launch Software1",
+            "name": "Launch Current File",
             "request": "launch",
-            "vmArgs": "--module-path /Users/seansawyer/Documents/javafx-sdk-17.0.0.1/lib --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "Software1",
-            "projectName": "Software1_46457112"
+            "mainClass": "${file}"
         }
     ]
 }
