@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Controller_parts {
+public class Controller_products {
     public Button cancelBtn;
     public Label statusFld;
 
@@ -20,7 +20,7 @@ public class Controller_parts {
         statusFld.setText(text);
         brTest.close();
     }
-
+    
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
