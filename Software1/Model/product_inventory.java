@@ -13,4 +13,9 @@ public class product_inventory {
     public static ObservableList<Product> getInventoryItems(){
         return the_inventory;
     }
+
+    public static ObservableList<Product> getCurrentItem(int index){
+        the_inventory.get(index);
+        return the_inventory;
+    }
 }

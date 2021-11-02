@@ -14,5 +14,8 @@ public class part_inventory {
         return the_inventory;
     }
 
-
+    public static ObservableList<Part> getCurrentItem(int index){
+        the_inventory.get(index);
+        return the_inventory;
+    }
 }
