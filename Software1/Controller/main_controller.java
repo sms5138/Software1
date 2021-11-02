@@ -1,6 +1,5 @@
 package Software1.Controller;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 import Software1.Model.Part;
@@ -103,24 +102,56 @@ public class main_controller {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("Add Parts");
         stage.setScene(new Scene(root1));  
         stage.show();
     }
 
     public void modifyPartsClick() throws IOException{
+        // Define the manipulation mode for the Parts UI when it's loaded
         String mode = "Modify";
+        
+        // Determine if there is a selected row, and return error if there is not.
+        if (partsTable.getSelectionModel().getSelectedItem() != null) {
+            Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+            System.out.println(selectedPart.getName());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        parts_controller controller = fxmlLoader.<parts_controller>getController();
-        controller.setMode(mode);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("Add Parts");
-        stage.setScene(new Scene(root1));  
-        stage.show();
+            // Load Parts UI
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            parts_controller controller = fxmlLoader.<parts_controller>getController();
+            controller.setMode(mode);
+            
+            Integer modID = selectedPart.getId();
+            String modName = selectedPart.getName();
+            Integer modInv = selectedPart.getStock();
+            Double modPrice = selectedPart.getPrice();
+            Integer modMin = selectedPart.getMin();
+            Integer modMax = selectedPart.getMax();
+
+            controller.setModifyData(modID, modName, modInv, modPrice, modMin, modMax);
+            
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root1));  
+            stage.show();
+
+        }else{
+            System.out.println("you must select a part to modify...");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/prompt.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            
+            prompt_controller controller = fxmlLoader.<prompt_controller>getController();
+            controller.setStatus("No Part Selected", "You must select a part that you want to modify...");
+            
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root1));  
+            stage.show();
+
+        }
     }
 
     public void addProductsClick() throws IOException{

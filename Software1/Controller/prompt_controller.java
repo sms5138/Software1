@@ -1,7 +1,5 @@
 package Software1.Controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -17,12 +15,14 @@ public class prompt_controller {
 
     @FXML
     private void initialize() throws IOException {
-        var brTest = new BufferedReader(new FileReader("./Software1/state"));
-        var text = brTest .readLine();
-        statusFld.setText(text);
-        brTest.close();
+        // may need to use later
     }
 
+    public void setStatus(String status, String details){
+        statusFld.setText(status);
+        detailFld.setText(details);
+    }
+    
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) OkBtn.getScene().getWindow();
         stage.close();
