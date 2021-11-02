@@ -1,4 +1,4 @@
-package Software1.Model.Model;
+package Software1.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

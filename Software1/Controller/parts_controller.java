@@ -1,4 +1,4 @@
-package Software1;
+package Software1.Controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Controller_products {
+public class parts_controller {
     public Button cancelBtn;
     public Label statusFld;
 
@@ -20,7 +20,7 @@ public class Controller_products {
         statusFld.setText(text);
         brTest.close();
     }
-    
+
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();

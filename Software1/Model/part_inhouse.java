@@ -1,4 +1,4 @@
-package Software1.Model.Model;
+package Software1.Model;
 
 public class part_inhouse extends Part{
 
