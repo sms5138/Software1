@@ -1,8 +1,8 @@
 package Software1.Controller;
 
-/* import java.io.BufferedReader;
-import java.io.FileReader; */
 import java.io.IOException;
+
+import Software1.Model.part_inventory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,10 +25,7 @@ public class parts_controller {
 
     @FXML
     private void initialize() throws IOException {
-/*         var brTest = new BufferedReader(new FileReader("./Software1/state"));
-        var text = brTest .readLine();
-        statusFld.setText(text);
-        brTest.close(); */
+
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
@@ -47,5 +44,10 @@ public class parts_controller {
         priceFld.setText(String.valueOf(price));
         minFld.setText(String.valueOf(min));
         maxFld.setText(String.valueOf(max));
+    }
+
+    public void saveModifyData(){
+        System.out.println(part_inventory.getInventoryItems());
+        
     }
 }

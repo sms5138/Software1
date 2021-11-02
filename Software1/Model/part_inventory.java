@@ -13,4 +13,6 @@ public class part_inventory {
     public static ObservableList<Part> getInventoryItems(){
         return the_inventory;
     }
+
+
 }

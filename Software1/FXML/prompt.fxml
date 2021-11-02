@@ -8,12 +8,12 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Software1.Controller.prompt_controller">
    <children>
       <Button fx:id="OkBtn" layoutX="270.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="OK" />
-      <Label fx:id="statusFld" layoutX="185.0" layoutY="37.0" text="StatusMessageHere">
+      <Label fx:id="statusFld" layoutX="0.0" layoutY="37.0" text="StatusMessageHere">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="detailFld" layoutX="225.0" layoutY="191.0" text="DetailsForStatusHere">
+      <Label fx:id="detailFld" layoutX="0.0" layoutY="191.0" text="DetailsForStatusHere">
          <font>
             <Font size="14.0" />
          </font>

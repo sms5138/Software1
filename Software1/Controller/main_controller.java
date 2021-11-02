@@ -102,7 +102,8 @@ public class main_controller {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(new Scene(root1));  
+        stage.setScene(new Scene(root1));
+        stage.setResizable(false);  
         stage.show();
     }
 
@@ -113,7 +114,6 @@ public class main_controller {
         // Determine if there is a selected row, and return error if there is not.
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
-            System.out.println(selectedPart.getName());
 
             // Load Parts UI
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
@@ -134,6 +134,7 @@ public class main_controller {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root1));  
+            stage.setResizable(false);  
             stage.show();
 
         }else{
@@ -148,7 +149,8 @@ public class main_controller {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root1));  
+            stage.setScene(new Scene(root1)); 
+            stage.setResizable(false);   
             stage.show();
 
         }
@@ -166,6 +168,7 @@ public class main_controller {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Add Parts");
         stage.setScene(new Scene(root1));  
+        stage.setResizable(false);  
         stage.show();
     }
 
@@ -183,7 +186,8 @@ public class main_controller {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Modify Parts");
-        stage.setScene(new Scene(root1));  
+        stage.setScene(new Scene(root1));
+        stage.setResizable(false);    
         stage.show();
     }
 
