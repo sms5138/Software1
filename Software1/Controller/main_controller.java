@@ -4,9 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import Software1.Model.Part;
+import Software1.Model.Product;
 import Software1.Model.part_inhouse;
 import Software1.Model.part_inventory;
 import Software1.Model.part_outsource;
+import Software1.Model.product_inhouse;
+import Software1.Model.product_inventory;
+import Software1.Model.product_outsource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,6 +49,21 @@ public class main_controller {
     private TableColumn<Part, Integer> partPriceCol;
 
     @FXML
+    private TableView<Product> productsTable;
+
+    @FXML
+    private TableColumn<Product, Integer> productIDCol;
+
+    @FXML
+    private TableColumn<Product, String> productNameCol;
+
+    @FXML
+    private TableColumn<Product, Integer> productInventoryCol;
+
+    @FXML
+    private TableColumn<Product, Double> productPriceCol;
+
+    @FXML
     private void initialize() throws IOException {
         part_inhouse test0 = new part_inhouse(1, "testInhousePart", 1.50, 100, 5, 10, 2);
         part_inventory.addInventoryItems(test0);
@@ -58,17 +77,30 @@ public class main_controller {
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        product_inhouse test2 = new product_inhouse(1, "testInhouseProduct", 3.5, 150, 2, 20, 62);
+        product_inventory.addInventoryItems(test2);
+
+        product_outsource test3 = new product_outsource(2, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
+        product_inventory.addInventoryItems(test3);
+
+        productsTable.setItems(product_inventory.getInventoryItems());
+
+        productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     public void addPartsClick() throws IOException{
-        FileWriter myWriter = new FileWriter("./Software1/state");
-        myWriter.write("Add");
-        myWriter.close();
+        // Pass the click type to the `parts.fxml`
+        String mode = "Add";
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
+        parts_controller controller = fxmlLoader.<parts_controller>getController();
+        controller.setMode(mode);
         Stage stage = new Stage();
-        // System.out.print(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Add Parts");
@@ -77,14 +109,13 @@ public class main_controller {
     }
 
     public void modifyPartsClick() throws IOException{
-        FileWriter myWriter = new FileWriter("./Software1/state");
-        myWriter.write("Modify");
-        myWriter.close();
+        String mode = "Modify";
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
+        parts_controller controller = fxmlLoader.<parts_controller>getController();
+        controller.setMode(mode);
         Stage stage = new Stage();
-        // System.out.print(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Add Parts");
@@ -93,14 +124,13 @@ public class main_controller {
     }
 
     public void addProductsClick() throws IOException{
-        FileWriter myWriter = new FileWriter("./Software1/state");
-        myWriter.write("Add");
-        myWriter.close();
+        String mode = "Add";
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
+        products_controller controller = fxmlLoader.<products_controller>getController();
+        controller.setMode(mode);
         Stage stage = new Stage();
-        // System.out.print(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Add Parts");
@@ -109,14 +139,16 @@ public class main_controller {
     }
 
     public void modifyProductsClick() throws IOException{
-        FileWriter myWriter = new FileWriter("./Software1/state");
-        myWriter.write("Modify");
-        myWriter.close();
+        String mode = "Modify";
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
+        
+        // Populate elements of new UI before `show`
+        products_controller controller = fxmlLoader.<products_controller>getController();
+        controller.setMode(mode);
+        
         Stage stage = new Stage();
-        // System.out.print(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Modify Parts");

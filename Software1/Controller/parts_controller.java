@@ -1,7 +1,7 @@
 package Software1.Controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+/* import java.io.BufferedReader;
+import java.io.FileReader; */
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,14 +15,18 @@ public class parts_controller {
 
     @FXML
     private void initialize() throws IOException {
-        var brTest = new BufferedReader(new FileReader("./Software1/state"));
+/*         var brTest = new BufferedReader(new FileReader("./Software1/state"));
         var text = brTest .readLine();
         statusFld.setText(text);
-        brTest.close();
+        brTest.close(); */
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
+    }
+
+    public void setMode(String mode){
+        statusFld.setText(mode);
     }
 }
