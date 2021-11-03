@@ -27,6 +27,7 @@ public class main_controller {
 
     public Button partsAdd;
     public Button partsModify;
+    public Button partsDelete;
     public Button productAdd;
     public Button productModify;
     public Button mainFormExit;
@@ -194,6 +195,13 @@ public class main_controller {
     public void mainFormExit(){
         final Stage stage = (Stage) mainFormExit.getScene().getWindow();
         stage.close();
+    }
+
+    public void deletePart(){
+        if (partsTable.getSelectionModel().getSelectedItem() != null) {
+            Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+            partsTable.getItems().removeAll(selectedPart);
+        }
     }
 
 }

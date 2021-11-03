@@ -26,12 +26,12 @@
       <RadioButton fx:id="inhouseRadio" layoutX="207.0" layoutY="103.0" mnemonicParsing="false" selected="true" text="In-House" />
       <RadioButton fx:id="outsourceRadio" layoutX="333.0" layoutY="103.0" mnemonicParsing="false" text="Outsourced" />
 
-      <TextField fx:id="id" disable="true" layoutX="253.0" layoutY="159.0" promptText="Auto  Generated - Disabled" />
-      <TextField fx:id="name" layoutX="253.0" layoutY="206.0" text="name" />
-      <TextField fx:id="inv" layoutX="253.0" layoutY="251.0" text="inv" />
-      <TextField fx:id="price" layoutX="253.0" layoutY="292.0" text="price" />
-      <TextField fx:id="max" layoutX="253.0" layoutY="336.0" text="max" />
-      <TextField fx:id="machineID" layoutX="251.0" layoutY="433.0" text="machineID" />
-      <TextField fx:id="min" layoutX="253.0" layoutY="383.0" text="min" />
+      <TextField fx:id="idFld" disable="true" layoutX="253.0" layoutY="159.0" promptText="Auto  Generated - Disabled" />
+      <TextField fx:id="nameFld" layoutX="253.0" layoutY="206.0" text="name" />
+      <TextField fx:id="invFld" layoutX="253.0" layoutY="251.0" text="inv" />
+      <TextField fx:id="priceFld" layoutX="253.0" layoutY="292.0" text="price" />
+      <TextField fx:id="maxFld" layoutX="253.0" layoutY="336.0" text="max" />
+      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" text="machineID" />
+      <TextField fx:id="minFld" layoutX="253.0" layoutY="383.0" text="min" />
    </children>
 </Pane>
