@@ -1,6 +1,7 @@
 package Software1.Controller;
 
 import java.io.IOException;
+//import java.util.concurrent.TimeUnit;
 
 import Software1.Model.Part;
 import Software1.Model.part_inhouse;
@@ -36,27 +37,32 @@ public class parts_controller {
     public RadioButton inhouseRadio;
     public RadioButton outsourceRadio;
 
-    private static Part receivedPart = null;
+    public static Part receivedPart = null;
 
     public static void ReceiveIncomingData(Part passedPart){
-
         receivedPart = passedPart;
     }
 
     @FXML
     private void initialize() throws IOException {
+        // Create group for toggle buttons
         ToggleGroup group = new ToggleGroup();
         inhouseRadio.setToggleGroup(group);
         outsourceRadio.setSelected(true);
         outsourceRadio.setToggleGroup(group);
 
+        
         if(statusFld.getText() == "Add"){
             int idCount = part_inventory.getInventoryItems().size() + 1;
             idFld.setText(String.valueOf(idCount));
         }else{
             nameFld.setText(receivedPart.getName());
+            invFld.setText(String.valueOf(receivedPart.getStock()));
+            minFld.setText(String.valueOf(receivedPart.getMin()));
+            maxFld.setText(String.valueOf(receivedPart.getMax()));
+            priceFld.setText(String.valueOf(receivedPart.getPrice()));
+            idFld.setText(String.valueOf(receivedPart.getId()));
         }
-        System.out.println(receivedPart.getName());
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
@@ -68,25 +74,11 @@ public class parts_controller {
         statusFld.setText(mode);
     }
 
-    public void setModifyData(Integer id, String name, Integer inv, Double price, Integer min, Integer max){
-        idFld.setText(String.valueOf(id));
-        nameFld.setText(name);
-        invFld.setText(String.valueOf(inv));
-        priceFld.setText(String.valueOf(price));
-        minFld.setText(String.valueOf(min));
-        maxFld.setText(String.valueOf(max));
-        // System.out.println(partsTable.getSelectionModel().getSelectedItem());
-    }
-
-
-
-    public void saveModifyData() throws IOException{
-/*         String name = nameFld.getText();
-        System.out.println("Part Name: " + name); */
+    public void saveModifyData() throws IOException, InterruptedException{
         if(statusFld.getText() == "Add"){
             System.out.println("adding new part");
 
-            int idCount = part_inventory.getInventoryItems().size() + 1;
+            int idCount = part_inventory.getNumberOfItems() + 1;
 
 
             if(inhouseRadio.isSelected()){
@@ -110,11 +102,24 @@ public class parts_controller {
             stage.setScene(new Scene(root1)); 
             stage.setResizable(false);   
             stage.show();
+
         } else {
             System.out.println("modifying data...");
-            receivedPart.setStock(867);
+
+            // set updated values to the object
+            receivedPart.setStock(Integer.parseInt(invFld.getText()));
+            receivedPart.setName(nameFld.getText());
+            receivedPart.setMax(Integer.parseInt(maxFld.getText()));
+            receivedPart.setMin(Integer.parseInt(minFld.getText()));
+            receivedPart.setPrice(Double.parseDouble(priceFld.getText()));
+
+            // get index of object
+            int index = receivedPart.getId() - 1;
+
+            // update selected object
+            part_inventory.updateParts(index, receivedPart);
             System.out.println("saved...");
-            
+
         }
     }
 

@@ -111,9 +111,6 @@ public class main_controller {
 
     public void modifyPartsClick() throws IOException{
 
-        // passing object test
-        
-        // // Define the manipulation mode for the Parts UI when it's loaded
         String mode = "Modify";
         
         // // Determine if there is a selected row, and return error if there is not.

@@ -18,4 +18,20 @@ public class part_inventory {
         the_inventory.get(index);
         return the_inventory;
     }
+
+    public static ObservableList<Part> removeParts(Part partToRemove){
+        the_inventory.remove(partToRemove);
+        return the_inventory;
+    }
+
+    public static ObservableList<Part> updateParts(int index, Part partToRemove){
+        the_inventory.set(index, partToRemove);
+        return the_inventory;
+    }
+
+    public static int getNumberOfItems(){
+        Object[] inventory_array = the_inventory.toArray();
+        return inventory_array.length;
+
+    }
 }
