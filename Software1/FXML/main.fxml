@@ -51,13 +51,13 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="330.0" layoutX="412.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="380.0" />
             
             <!-- Parts Controls -->
-            <Button fx:id="partsAdd" onAction="#addPartsClick" layoutX="219.0" layoutY="377.0" mnemonicParsing="false" text="Add" />
-            <Button fx:id="partsModify" onAction="#modifyPartsClick" layoutX="268.0" layoutY="377.0" mnemonicParsing="false" text="Modify" />
-            <Button fx:id="partsDelete" onAction="#deletePart" layoutX="334.0" layoutY="377.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="partsAdd" layoutX="219.0" layoutY="377.0" mnemonicParsing="false" onAction="#addPartsClick" text="Add" />
+            <Button fx:id="partsModify" layoutX="268.0" layoutY="377.0" mnemonicParsing="false" onAction="#modifyPartsClick" text="Modify" />
+            <Button fx:id="partsDelete" layoutX="334.0" layoutY="377.0" mnemonicParsing="false" onAction="#deletePart" text="Delete" />
 
             <!-- Products Controls -->
-            <Button fx:id="productAdd" onAction="#addProductsClick" layoutX="616.0" layoutY="377.0" mnemonicParsing="false" text="Add" />
-            <Button fx:id="productModify" onAction="#modifyProductsClick" layoutX="665.0" layoutY="377.0" mnemonicParsing="false" text="Modify" />
+            <Button fx:id="productAdd" layoutX="616.0" layoutY="377.0" mnemonicParsing="false" onAction="#addProductsClick" text="Add" />
+            <Button fx:id="productModify" layoutX="665.0" layoutY="377.0" mnemonicParsing="false" onAction="#modifyProductsClick" text="Modify" />
             <Button fx:id="productDelete" layoutX="732.0" layoutY="377.0" mnemonicParsing="false" text="Delete" />
 
             <!-- Main Form Controls -->
@@ -87,7 +87,8 @@
                   <TableColumn fx:id="productInventoryCol" prefWidth="95.0" text="Inventory Level" />
                   <TableColumn fx:id="productPriceCol" prefWidth="84.0" text="Cost per Unit" />
                </columns>
-            </TableView> 
+            </TableView>
+            <Button fx:id="testButton" layoutX="276.0" layoutY="418.0" mnemonicParsing="false" onAction="#TestFunctionality" text="Test" /> 
       </children>
     </AnchorPane>
   </children>

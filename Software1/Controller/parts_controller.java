@@ -2,6 +2,7 @@ package Software1.Controller;
 
 import java.io.IOException;
 
+import Software1.Model.Part;
 import Software1.Model.part_inhouse;
 // import Software1.Model.Part;
 import Software1.Model.part_inventory;
@@ -35,7 +36,12 @@ public class parts_controller {
     public RadioButton inhouseRadio;
     public RadioButton outsourceRadio;
 
+    private static Part receivedPart = null;
 
+    public static void ReceiveIncomingData(Part passedPart){
+
+        receivedPart = passedPart;
+    }
 
     @FXML
     private void initialize() throws IOException {
@@ -47,7 +53,10 @@ public class parts_controller {
         if(statusFld.getText() == "Add"){
             int idCount = part_inventory.getInventoryItems().size() + 1;
             idFld.setText(String.valueOf(idCount));
+        }else{
+            nameFld.setText(receivedPart.getName());
         }
+        System.out.println(receivedPart.getName());
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
@@ -68,6 +77,8 @@ public class parts_controller {
         maxFld.setText(String.valueOf(max));
         // System.out.println(partsTable.getSelectionModel().getSelectedItem());
     }
+
+
 
     public void saveModifyData() throws IOException{
 /*         String name = nameFld.getText();
@@ -99,7 +110,12 @@ public class parts_controller {
             stage.setScene(new Scene(root1)); 
             stage.setResizable(false);   
             stage.show();
-        } 
+        } else {
+            System.out.println("modifying data...");
+            receivedPart.setStock(867);
+            System.out.println("saved...");
+            
+        }
     }
 
     

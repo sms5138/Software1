@@ -31,6 +31,7 @@ public class main_controller {
     public Button productAdd;
     public Button productModify;
     public Button mainFormExit;
+    public Button TestButton;
     public Label statusFld;
 
     @FXML
@@ -109,12 +110,18 @@ public class main_controller {
     }
 
     public void modifyPartsClick() throws IOException{
-        // Define the manipulation mode for the Parts UI when it's loaded
+
+        // passing object test
+        
+        // // Define the manipulation mode for the Parts UI when it's loaded
         String mode = "Modify";
         
-        // Determine if there is a selected row, and return error if there is not.
+        // // Determine if there is a selected row, and return error if there is not.
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
+            
+            // Pass the data
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+            parts_controller.ReceiveIncomingData(selectedPart);
 
             // Load Parts UI
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
@@ -122,14 +129,14 @@ public class main_controller {
             parts_controller controller = fxmlLoader.<parts_controller>getController();
             controller.setMode(mode);
             
-            Integer modID = selectedPart.getId();
-            String modName = selectedPart.getName();
-            Integer modInv = selectedPart.getStock();
-            Double modPrice = selectedPart.getPrice();
-            Integer modMin = selectedPart.getMin();
-            Integer modMax = selectedPart.getMax();
+            // Integer modID = selectedPart.getId();
+            // String modName = selectedPart.getName();
+            // Integer modInv = selectedPart.getStock();
+            // Double modPrice = selectedPart.getPrice();
+            // Integer modMin = selectedPart.getMin();
+            // Integer modMax = selectedPart.getMax();
 
-            controller.setModifyData(modID, modName, modInv, modPrice, modMin, modMax);
+            //controller.setModifyData(modID, modName, modInv, modPrice, modMin, modMax);
             
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -202,6 +209,16 @@ public class main_controller {
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
             partsTable.getItems().removeAll(selectedPart);
         }
+    }
+
+    public void TestFunctionality(){
+        System.out.println("reload table...");
+        productsTable.setItems(product_inventory.getInventoryItems());
+
+        productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
 }
