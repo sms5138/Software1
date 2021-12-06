@@ -1,11 +1,8 @@
 package Software1.Controller;
 
 import java.io.IOException;
-//import java.util.concurrent.TimeUnit;
 
-import Software1.Model.Part;
 import Software1.Model.part_inhouse;
-// import Software1.Model.Part;
 import Software1.Model.part_inventory;
 import Software1.Model.part_outsource;
 import javafx.event.ActionEvent;
@@ -16,14 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-// import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class parts_controller {
+public class parts_add_controller {
     public Button cancelBtn;
     public Button saveBtn;
     public Label statusFld;
@@ -37,11 +33,7 @@ public class parts_controller {
     public RadioButton inhouseRadio;
     public RadioButton outsourceRadio;
 
-    public static Part receivedPart = null;
 
-    public static void ReceiveIncomingData(Part passedPart){
-        receivedPart = passedPart;
-    }
 
     @FXML
     private void initialize() throws IOException {
@@ -51,18 +43,9 @@ public class parts_controller {
         outsourceRadio.setSelected(true);
         outsourceRadio.setToggleGroup(group);
 
-        
-        if(statusFld.getText() == "Add"){
-            int idCount = part_inventory.getInventoryItems().size() + 1;
-            idFld.setText(String.valueOf(idCount));
-        }else{
-            nameFld.setText(receivedPart.getName());
-            invFld.setText(String.valueOf(receivedPart.getStock()));
-            minFld.setText(String.valueOf(receivedPart.getMin()));
-            maxFld.setText(String.valueOf(receivedPart.getMax()));
-            priceFld.setText(String.valueOf(receivedPart.getPrice()));
-            idFld.setText(String.valueOf(receivedPart.getId()));
-        }
+        int idCount = part_inventory.getInventoryItems().size() + 1;
+        idFld.setText(String.valueOf(idCount));
+
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
@@ -75,7 +58,7 @@ public class parts_controller {
     }
 
     public void saveModifyData() throws IOException, InterruptedException{
-        if(statusFld.getText() == "Add"){
+
             System.out.println("adding new part");
 
             int idCount = part_inventory.getNumberOfItems() + 1;
@@ -87,7 +70,7 @@ public class parts_controller {
                 part_inventory.addPart(PartToAdd);
             }else{
                 System.out.println("outsource part being added.");
-                part_outsource PartToAdd = new part_outsource(idCount, nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), nameFld.getText());
+                part_outsource PartToAdd = new part_outsource(idCount, nameFld.getText(), Double.valueOf(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), nameFld.getText());
                 part_inventory.addPart(PartToAdd);
             }
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/prompt.fxml"));
@@ -103,24 +86,7 @@ public class parts_controller {
             stage.setResizable(false);   
             stage.show();
 
-        } else {
-            System.out.println("modifying data...");
-
-            // set updated values to the object
-            receivedPart.setStock(Integer.parseInt(invFld.getText()));
-            receivedPart.setName(nameFld.getText());
-            receivedPart.setMax(Integer.parseInt(maxFld.getText()));
-            receivedPart.setMin(Integer.parseInt(minFld.getText()));
-            receivedPart.setPrice(Double.parseDouble(priceFld.getText()));
-
-            // get index of object
-            int index = receivedPart.getId() - 1;
-
-            // update selected object
-            part_inventory.updateParts(index, receivedPart);
-            System.out.println("saved...");
-
-        }
+        
     }
 
     

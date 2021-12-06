@@ -2,6 +2,7 @@ package Software1.Controller;
 
 import java.io.IOException;
 
+import Software1.Main;
 import Software1.Model.Part;
 import Software1.Model.Product;
 import Software1.Model.part_inhouse;
@@ -66,11 +67,13 @@ public class main_controller {
 
     @FXML
     private void initialize() throws IOException {
-        part_inhouse test0 = new part_inhouse(1, "testInhousePart", 1.50, 100, 5, 10, 2);
-        part_inventory.addInventoryItems(test0);
-        
-        part_outsource test1 = new part_outsource(2, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
-        part_inventory.addInventoryItems(test1);
+        int index_number = Main.index + 1;
+        part_inhouse test0 = new part_inhouse(index_number, "testInhousePart", 1.50, 100, 5, 10, 2);
+        part_inventory.addPart(test0);
+
+        index_number = Main.index + 1;
+        part_outsource test1 = new part_outsource(index_number, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
+        part_inventory.addPart(test1);
 
         partsTable.setItems(part_inventory.getInventoryItems());
 
@@ -97,9 +100,9 @@ public class main_controller {
         // Pass the click type to the `parts.fxml`
         String mode = "Add";
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts_add.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        parts_controller controller = fxmlLoader.<parts_controller>getController();
+        parts_add_controller controller = fxmlLoader.<parts_add_controller>getController();
         controller.setMode(mode);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

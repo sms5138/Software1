@@ -20,4 +20,6 @@ public class Main extends Application {
          primaryStage.setResizable(false);
          primaryStage.show();
       }
+
+      public static int index = 0;
 }

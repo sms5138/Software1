@@ -5,9 +5,16 @@ import javafx.collections.ObservableList;
 
 public class part_inventory {
     private static ObservableList<Part> the_inventory = FXCollections.observableArrayList();
+    private static int inventory_index;
 
-    public static void addInventoryItems(Part parts){
+    public static void addPart(Part parts){
         the_inventory.add(parts);
+
+        
+    }
+
+    public static int getInventoryIndex(){
+        return inventory_index;
     }
 
     public static ObservableList<Part> getInventoryItems(){
