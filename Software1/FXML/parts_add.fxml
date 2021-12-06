@@ -31,7 +31,7 @@
       <TextField fx:id="invFld" layoutX="253.0" layoutY="251.0" promptText="10" />
       <TextField fx:id="priceFld" layoutX="253.0" layoutY="292.0" promptText="1.50" />
       <TextField fx:id="maxFld" layoutX="253.0" layoutY="336.0" promptText="100" />
-      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" promptText="MachineID" />
       <TextField fx:id="minFld" layoutX="253.0" layoutY="383.0" promptText="5" />
+      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" promptText="MachineID" />
    </children>
 </Pane>
