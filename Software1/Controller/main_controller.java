@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -121,27 +122,19 @@ public class main_controller {
 
         String mode = "Modify";
         
-        // // Determine if there is a selected row, and return error if there is not.
+        // Determine if there is a selected row, and return error if there is not.
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
             
             // Pass the data
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
-            parts_controller.ReceiveIncomingData(selectedPart);
+            int selectedIndex = partsTable.getSelectionModel().getSelectedIndex();
+            parts_controller.ReceiveIncomingData(selectedPart, selectedIndex);
 
             // Load Parts UI
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/parts.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             parts_controller controller = fxmlLoader.<parts_controller>getController();
             controller.setMode(mode);
-            
-            // Integer modID = selectedPart.getId();
-            // String modName = selectedPart.getName();
-            // Integer modInv = selectedPart.getStock();
-            // Double modPrice = selectedPart.getPrice();
-            // Integer modMin = selectedPart.getMin();
-            // Integer modMax = selectedPart.getMax();
-
-            //controller.setModifyData(modID, modName, modInv, modPrice, modMin, modMax);
             
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -153,18 +146,10 @@ public class main_controller {
         }else{
             System.out.println("you must select a part to modify...");
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/prompt.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            
-            prompt_controller controller = fxmlLoader.<prompt_controller>getController();
-            controller.setStatus("No Part Selected", "You must select a part that you want to modify...");
-            
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root1)); 
-            stage.setResizable(false);   
-            stage.show();
+            Alert warn = new Alert(Alert.AlertType.WARNING);
+            warn.setTitle("Please select an item to modify...");
+            warn.setContentText("No item to has been selected to modify...");
+            warn.showAndWait();
 
         }
     }
