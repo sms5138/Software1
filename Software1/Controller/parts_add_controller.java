@@ -1,6 +1,7 @@
 package Software1.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import Software1.Model.part_inhouse;
 import Software1.Model.part_inventory;
@@ -43,7 +44,7 @@ public class parts_add_controller {
         outsourceRadio.setSelected(true);
         outsourceRadio.setToggleGroup(group);
 
-        int idCount = part_inventory.getInventoryItems().size() + 1;
+        int idCount = (int) (new Date().getTime()/1000);
         idFld.setText(String.valueOf(idCount));
 
     }
@@ -57,20 +58,19 @@ public class parts_add_controller {
         statusFld.setText(mode);
     }
 
-    public void saveModifyData() throws IOException, InterruptedException{
+    public void saveModifyData(ActionEvent event) throws IOException, InterruptedException{
 
             System.out.println("adding new part");
-
-            int idCount = part_inventory.getNumberOfItems() + 1;
+            
 
 
             if(inhouseRadio.isSelected()){
                 System.out.println("inhouse part being added."); 
-                part_inhouse PartToAdd = new part_inhouse(idCount, nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), 2);
+                part_inhouse PartToAdd = new part_inhouse(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), 2);
                 part_inventory.addPart(PartToAdd);
             }else{
                 System.out.println("outsource part being added.");
-                part_outsource PartToAdd = new part_outsource(idCount, nameFld.getText(), Double.valueOf(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), nameFld.getText());
+                part_outsource PartToAdd = new part_outsource(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.valueOf(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), nameFld.getText());
                 part_inventory.addPart(PartToAdd);
             }
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/prompt.fxml"));
@@ -86,6 +86,8 @@ public class parts_add_controller {
             stage.setResizable(false);   
             stage.show();
 
+            Stage stageCurrent = (Stage) saveBtn.getScene().getWindow();
+            stageCurrent.close();
         
     }
 

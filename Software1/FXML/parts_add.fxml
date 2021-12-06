@@ -27,11 +27,11 @@
       <RadioButton fx:id="outsourceRadio" layoutX="333.0" layoutY="103.0" mnemonicParsing="false" text="Outsourced" />
 
       <TextField fx:id="idFld" disable="true" layoutX="253.0" layoutY="159.0" promptText="Auto  Generated - Disabled" />
-      <TextField fx:id="nameFld" layoutX="253.0" layoutY="206.0" text="name" />
-      <TextField fx:id="invFld" layoutX="253.0" layoutY="251.0" text="inv" />
-      <TextField fx:id="priceFld" layoutX="253.0" layoutY="292.0" text="price" />
-      <TextField fx:id="maxFld" layoutX="253.0" layoutY="336.0" text="max" />
-      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" text="machineID" />
-      <TextField fx:id="minFld" layoutX="253.0" layoutY="383.0" text="min" />
+      <TextField fx:id="nameFld" layoutX="253.0" layoutY="206.0" promptText="Name" />
+      <TextField fx:id="invFld" layoutX="253.0" layoutY="251.0" promptText="10" />
+      <TextField fx:id="priceFld" layoutX="253.0" layoutY="292.0" promptText="1.50" />
+      <TextField fx:id="maxFld" layoutX="253.0" layoutY="336.0" promptText="100" />
+      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" promptText="MachineID" />
+      <TextField fx:id="minFld" layoutX="253.0" layoutY="383.0" promptText="5" />
    </children>
 </Pane>

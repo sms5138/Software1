@@ -1,8 +1,9 @@
 package Software1.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 
-import Software1.Main;
+//import Software1.Main;
 import Software1.Model.Part;
 import Software1.Model.Product;
 import Software1.Model.part_inhouse;
@@ -67,11 +68,15 @@ public class main_controller {
 
     @FXML
     private void initialize() throws IOException {
-        int index_number = Main.index + 1;
-        part_inhouse test0 = new part_inhouse(index_number, "testInhousePart", 1.50, 100, 5, 10, 2);
+        int timeInt = (int) (new Date().getTime()/1000);
+        String testDataName = "testInhousePart";
+        int index_number = timeInt + testDataName.length();
+        part_inhouse test0 = new part_inhouse(timeInt, "testInhousePart", 1.50, 100, 5, 10, 2);
         part_inventory.addPart(test0);
 
-        index_number = Main.index + 1;
+        timeInt = (int) (new Date().getTime()/1000);
+        testDataName = "testOutsourcePart";
+        index_number = timeInt + testDataName.length();
         part_outsource test1 = new part_outsource(index_number, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
         part_inventory.addPart(test1);
 
