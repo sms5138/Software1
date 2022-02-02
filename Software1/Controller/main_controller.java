@@ -12,6 +12,9 @@ import Software1.Model.part_outsource;
 import Software1.Model.product_inhouse;
 import Software1.Model.product_inventory;
 import Software1.Model.product_outsource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,8 +38,9 @@ public class main_controller {
     public Button productAdd;
     public Button productModify;
     public Button mainFormExit;
-    public Button TestButton;
+    public Button partSearchBtn;
     public Label statusFld;
+    public TextField partSearchFld;
 
     @FXML
     private TableView<Part> partsTable;
@@ -201,14 +206,56 @@ public class main_controller {
         }
     }
 
-    public void TestFunctionality(){
-        System.out.println("reload table...");
-        productsTable.setItems(product_inventory.getInventoryItems());
+    private ObservableList<Part> searchByPartName(String partialName){
+        ObservableList<Part> namedPart = FXCollections.observableArrayList();
 
-        productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ObservableList<Part> allParts = part_inventory.getInventoryItems();
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getName().contains(partialName)){
+                namedPart.add(partToCheck);
+            }
+        }
+
+
+        return namedPart;
     }
+
+
+    public void partSearch(ActionEvent actionEvent){
+        String search = partSearchFld.getText();
+
+        ObservableList<Part> partsSearch = searchByPartName(search);
+
+        partsTable.setItems(partsSearch);
+        partSearchFld.setText("");
+
+    }
+
+    // public void partSearch(ActionEvent actionEvent){
+    //     String searchCriteria = partSearchFld.getText();
+
+    //     if(!(searchCriteria.isEmpty())){
+    //         System.out.println("searching for " + searchCriteria + "...");
+
+    //         for(Part partToCheck : part_inventory.getInventoryItems()){
+    //             System.out.println("searching object " + partToCheck.getId() + "...");
+    //             if (Integer.parseInt(searchCriteria) == partToCheck.getId() ){
+    //                 System.out.println("part found by ID");
+    //                 System.out.println("part name: " + partToCheck.getName());
+    //                 return;
+    //             }
+    //             //else if (searchCriteria == partToCheck.getName() ){
+    //             //     System.out.println("part found by Name");
+    //             // }
+    //         }
+    //     }else{
+    //         Alert alert = new Alert(Alert.AlertType.ERROR);
+    //         alert.setTitle("An Error has occured...");
+    //         alert.setContentText("Please enter a valid value to search...");
+    //         alert.showAndWait();
+    //     }
+    // }
 
 }

@@ -78,7 +78,8 @@
             </TableView>
             
             <!-- Search boxes -->
-            <TextField layoutX="227.0" layoutY="83.0" promptText="Search by Part ID" />
+            <TextField fx:id="partSearchFld" layoutX="163.0" layoutY="83.0" promptText="Search by Part ID" />
+            <Button fx:id="partSearchBtn" layoutX="333.0" layoutY="83.0" mnemonicParsing="false" onAction="#partSearch" text="Search" /> 
             <TextField layoutX="621.0" layoutY="83.0" promptText="Search by Product ID" />
             <TableView fx:id="productsTable" layoutX="420.0" layoutY="112.0" prefHeight="259.0" prefWidth="365.0">
                <columns>
@@ -88,7 +89,7 @@
                   <TableColumn fx:id="productPriceCol" prefWidth="84.0" text="Cost per Unit" />
                </columns>
             </TableView>
-            <Button fx:id="testButton" layoutX="276.0" layoutY="418.0" mnemonicParsing="false" onAction="#TestFunctionality" text="Test" /> 
+            
       </children>
     </AnchorPane>
   </children>
