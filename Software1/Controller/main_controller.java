@@ -223,10 +223,43 @@ public class main_controller {
     }
 
 
+    private Part getPartById(int partID){
+        ObservableList<Part> allParts = part_inventory.getInventoryItems();
+
+        // for(int i = 0; i < allParts.size(); i++){
+
+        // }
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getId() == partID){
+                return partToCheck;
+            }
+        }
+
+        return null;
+    }
+
     public void partSearch(ActionEvent actionEvent){
         String search = partSearchFld.getText();
 
         ObservableList<Part> partsSearch = searchByPartName(search);
+
+        if(partsSearch.size() == 0){
+            try{
+                int part_id = Integer.parseInt(search);
+
+                Part searchedByID = getPartById(part_id);
+    
+                if(searchedByID != null){
+                    partsSearch.add(searchedByID);
+                }
+            }
+            catch(NumberFormatException e){
+                // ignore...
+            }
+
+        }
 
         partsTable.setItems(partsSearch);
         partSearchFld.setText("");
