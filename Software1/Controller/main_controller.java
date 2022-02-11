@@ -41,6 +41,8 @@ public class main_controller {
     public Button partSearchBtn;
     public Label statusFld;
     public TextField partSearchFld;
+    public TextField prodSearchFld;
+    public Button prodSearchBtn;
 
     @FXML
     private TableView<Part> partsTable;
@@ -76,14 +78,14 @@ public class main_controller {
     private void initialize() throws IOException {
         int timeInt = (int) (new Date().getTime()/1000);
         String testDataName = "testInhousePart";
-        int index_number = timeInt + testDataName.length();
+        int id_number = timeInt + testDataName.length();
         part_inhouse test0 = new part_inhouse(timeInt, "testInhousePart", 1.50, 100, 5, 10, 2);
         part_inventory.addPart(test0);
 
         timeInt = (int) (new Date().getTime()/1000);
         testDataName = "testOutsourcePart";
-        index_number = timeInt + testDataName.length();
-        part_outsource test1 = new part_outsource(index_number, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
+        id_number = timeInt + testDataName.length();
+        part_outsource test1 = new part_outsource(id_number, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
         part_inventory.addPart(test1);
 
         partsTable.setItems(part_inventory.getInventoryItems());
@@ -93,10 +95,16 @@ public class main_controller {
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        product_inhouse test2 = new product_inhouse(1, "testInhouseProduct", 3.5, 150, 2, 20, 62);
+        timeInt = (int) (new Date().getTime()/1000);
+        testDataName = "testInhouseProduct";
+        id_number = timeInt + testDataName.length();
+        product_inhouse test2 = new product_inhouse(id_number, "testInhouseProduct", 3.5, 150, 2, 20, 62);
         product_inventory.addInventoryItems(test2);
 
-        product_outsource test3 = new product_outsource(2, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
+        timeInt = (int) (new Date().getTime()/1000);
+        testDataName = "testOutsourceProduct";
+        id_number = timeInt + testDataName.length();
+        product_outsource test3 = new product_outsource(id_number, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
         product_inventory.addInventoryItems(test3);
 
         productsTable.setItems(product_inventory.getInventoryItems());
@@ -160,17 +168,17 @@ public class main_controller {
     }
 
     public void addProductsClick() throws IOException{
+        // Pass the click type to the `parts.fxml`
         String mode = "Add";
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products_add.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        products_controller controller = fxmlLoader.<products_controller>getController();
+        products_add_controller controller = fxmlLoader.<products_add_controller>getController();
         controller.setMode(mode);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("Add Parts");
-        stage.setScene(new Scene(root1));  
+        stage.setScene(new Scene(root1));
         stage.setResizable(false);  
         stage.show();
     }
@@ -178,20 +186,36 @@ public class main_controller {
     public void modifyProductsClick() throws IOException{
         String mode = "Modify";
         
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        
-        // Populate elements of new UI before `show`
-        products_controller controller = fxmlLoader.<products_controller>getController();
-        controller.setMode(mode);
-        
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("Modify Parts");
-        stage.setScene(new Scene(root1));
-        stage.setResizable(false);    
-        stage.show();
+        // Determine if there is a selected row, and return error if there is not.
+        if (productsTable.getSelectionModel().getSelectedItem() != null) {
+            
+            // Pass the data
+            Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
+            int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
+            products_controller.ReceiveIncomingData(selectedPart, selectedIndex);
+
+            // Load Parts UI
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            products_controller controller = fxmlLoader.<products_controller>getController();
+            controller.setMode(mode);
+            
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root1));  
+            stage.setResizable(false);  
+            stage.show();
+
+        }else{
+            System.out.println("you must select a Product to modify...");
+
+            Alert warn = new Alert(Alert.AlertType.WARNING);
+            warn.setTitle("Please select an item to modify...");
+            warn.setContentText("No item to has been selected to modify...");
+            warn.showAndWait();
+
+        }
     }
 
     public void mainFormExit(){
@@ -205,6 +229,14 @@ public class main_controller {
             partsTable.getItems().removeAll(selectedPart);
         }
     }
+
+    public void deleteProd(){
+        if (productsTable.getSelectionModel().getSelectedItem() != null) {
+            Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
+            productsTable.getItems().removeAll(selectedPart);
+        }
+    }
+
 
     private ObservableList<Part> searchByPartName(String partialName){
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
@@ -266,29 +298,68 @@ public class main_controller {
 
     }
 
-    // public void partSearch(ActionEvent actionEvent){
-    //     String searchCriteria = partSearchFld.getText();
 
-    //     if(!(searchCriteria.isEmpty())){
-    //         System.out.println("searching for " + searchCriteria + "...");
 
-    //         for(Part partToCheck : part_inventory.getInventoryItems()){
-    //             System.out.println("searching object " + partToCheck.getId() + "...");
-    //             if (Integer.parseInt(searchCriteria) == partToCheck.getId() ){
-    //                 System.out.println("part found by ID");
-    //                 System.out.println("part name: " + partToCheck.getName());
-    //                 return;
-    //             }
-    //             //else if (searchCriteria == partToCheck.getName() ){
-    //             //     System.out.println("part found by Name");
-    //             // }
-    //         }
-    //     }else{
-    //         Alert alert = new Alert(Alert.AlertType.ERROR);
-    //         alert.setTitle("An Error has occured...");
-    //         alert.setContentText("Please enter a valid value to search...");
-    //         alert.showAndWait();
-    //     }
-    // }
+
+    private ObservableList<Product> searchByProdName(String partialName){
+        ObservableList<Product> namedPart = FXCollections.observableArrayList();
+
+        ObservableList<Product> allParts = product_inventory.getInventoryItems();
+
+        for(Product partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getName().contains(partialName)){
+                namedPart.add(partToCheck);
+            }
+        }
+
+
+        return namedPart;
+    }
+
+    private Product getProdById(int prodID){
+        ObservableList<Product> allProds = product_inventory.getInventoryItems();
+
+        // for(int i = 0; i < allParts.size(); i++){
+
+        // }
+
+        for(Product partToCheck : allProds){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getId() == prodID){
+                return partToCheck;
+            }
+        }
+
+        return null;
+    }
+
+    public void prodSearch(ActionEvent actionEvent){
+        String search = prodSearchFld.getText();
+
+        ObservableList<Product> prodSearch = searchByProdName(search);
+
+        if(prodSearch.size() == 0){
+            try{
+                int prod_id = Integer.parseInt(search);
+
+                Product searchedByID = getProdById(prod_id);
+    
+                if(searchedByID != null){
+                    prodSearch.add(searchedByID);
+                }
+            }
+            catch(NumberFormatException e){
+                // ignore...
+            }
+
+        }
+
+        productsTable.setItems(prodSearch);
+        prodSearchFld.setText("");
+
+    }
+
+
 
 }
