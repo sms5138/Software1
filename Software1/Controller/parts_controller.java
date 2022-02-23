@@ -3,7 +3,7 @@ package Software1.Controller;
 import java.io.IOException;
 
 import Software1.Model.Part;
-import Software1.Model.part_inventory;
+import Software1.Model.Inventory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -80,7 +80,7 @@ public class parts_controller {
             confirm.showAndWait();
 
             // update selected object
-            part_inventory.updateParts(receivedIndex, receivedPart);
+            Inventory.updateParts(receivedIndex, receivedPart);
         }
         catch(NumberFormatException e){
 

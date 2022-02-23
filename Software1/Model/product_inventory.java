@@ -4,18 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class product_inventory {
-    private static ObservableList<Product> the_inventory = FXCollections.observableArrayList();
+    private static ObservableList<Product> AllParts = FXCollections.observableArrayList();
 
     public static void addInventoryItems(Product products){
-        the_inventory.add(products);
+        AllParts.add(products);
     }
 
-    public static ObservableList<Product> getInventoryItems(){
-        return the_inventory;
+    public static ObservableList<Product> getAllParts(){
+        return AllParts;
     }
 
     public static ObservableList<Product> getCurrentItem(int index){
-        the_inventory.get(index);
-        return the_inventory;
+        AllParts.get(index);
+        return AllParts;
     }
 }

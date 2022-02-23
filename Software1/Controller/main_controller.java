@@ -7,7 +7,7 @@ import java.util.Date;
 import Software1.Model.Part;
 import Software1.Model.Product;
 import Software1.Model.part_inhouse;
-import Software1.Model.part_inventory;
+import Software1.Model.Inventory;
 import Software1.Model.part_outsource;
 import Software1.Model.product_inhouse;
 import Software1.Model.product_inventory;
@@ -80,15 +80,15 @@ public class main_controller {
         String testDataName = "testInhousePart";
         int id_number = timeInt + testDataName.length();
         part_inhouse test0 = new part_inhouse(timeInt, "testInhousePart", 1.50, 100, 5, 10, 2);
-        part_inventory.addPart(test0);
+        Inventory.addPart(test0);
 
         timeInt = (int) (new Date().getTime()/1000);
         testDataName = "testOutsourcePart";
         id_number = timeInt + testDataName.length();
         part_outsource test1 = new part_outsource(id_number, "testOutsourcePart", 2.50, 50, 7, 14, "3rdPartyPartName");
-        part_inventory.addPart(test1);
+        Inventory.addPart(test1);
 
-        partsTable.setItems(part_inventory.getInventoryItems());
+        partsTable.setItems(Inventory.getAllParts());
 
         partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -107,7 +107,7 @@ public class main_controller {
         product_outsource test3 = new product_outsource(id_number, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
         product_inventory.addInventoryItems(test3);
 
-        productsTable.setItems(product_inventory.getInventoryItems());
+        productsTable.setItems(product_inventory.getAllParts());
 
         productIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -192,8 +192,8 @@ public class main_controller {
             // Pass the data
             Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
-            // ObservableList<Part> PartsTableData = part_inventory.getInventoryItems();
-            products_controller.ReceiveIncomingData(selectedPart, selectedIndex, part_inventory.getInventoryItems());
+            // ObservableList<Part> PartsTableData = part_inventory.getAllParts();
+            products_controller.ReceiveIncomingData(selectedPart, selectedIndex, Inventory.getAllParts());
             
 
             // Load Parts UI
@@ -243,7 +243,7 @@ public class main_controller {
     private ObservableList<Part> searchByPartName(String partialName){
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
 
-        ObservableList<Part> allParts = part_inventory.getInventoryItems();
+        ObservableList<Part> allParts = Inventory.getAllParts();
 
         for(Part partToCheck : allParts){
             System.out.println("searching object " + partToCheck.getId() + "...");
@@ -258,7 +258,7 @@ public class main_controller {
 
 
     private Part getPartById(int partID){
-        ObservableList<Part> allParts = part_inventory.getInventoryItems();
+        ObservableList<Part> allParts = Inventory.getAllParts();
 
         // for(int i = 0; i < allParts.size(); i++){
 
@@ -306,7 +306,7 @@ public class main_controller {
     private ObservableList<Product> searchByProdName(String partialName){
         ObservableList<Product> namedPart = FXCollections.observableArrayList();
 
-        ObservableList<Product> allParts = product_inventory.getInventoryItems();
+        ObservableList<Product> allParts = product_inventory.getAllParts();
 
         for(Product partToCheck : allParts){
             System.out.println("searching object " + partToCheck.getId() + "...");
@@ -320,7 +320,7 @@ public class main_controller {
     }
 
     private Product getProdById(int prodID){
-        ObservableList<Product> allProds = product_inventory.getInventoryItems();
+        ObservableList<Product> allProds = product_inventory.getAllParts();
 
         // for(int i = 0; i < allParts.size(); i++){
 

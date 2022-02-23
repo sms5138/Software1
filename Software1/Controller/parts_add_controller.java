@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import Software1.Model.part_inhouse;
-import Software1.Model.part_inventory;
+import Software1.Model.Inventory;
 import Software1.Model.part_outsource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,7 +78,7 @@ public class parts_add_controller {
                 try{
                     System.out.println("inhouse part being added."); 
                     part_inhouse PartToAdd = new part_inhouse(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), 2);
-                    part_inventory.addPart(PartToAdd);
+                    Inventory.addPart(PartToAdd);
 
                     Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
                     confirm.setTitle("New Part Created...");
@@ -100,7 +100,7 @@ public class parts_add_controller {
                 try{
                     System.out.println("outsource part being added.");
                     part_outsource PartToAdd = new part_outsource(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.valueOf(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), nameFld.getText());
-                    part_inventory.addPart(PartToAdd);
+                    Inventory.addPart(PartToAdd);
     
                     Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
                     confirm.setTitle("New Part Created...");
