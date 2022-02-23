@@ -1,5 +1,7 @@
 package Software1.Model;
 
+import javafx.collections.ObservableList;
+
 /*
  * Supplied class Part.java 
  */
@@ -9,6 +11,7 @@ package Software1.Model;
  * @author Sean Sawyer
  */
 public abstract class Product {
+    private ObservableList<Part> associatedParts;
     private int id;
     private String name;
     private double price;

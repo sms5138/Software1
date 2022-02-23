@@ -45,18 +45,13 @@ public class parts_controller {
         outsourceRadio.setSelected(true);
         outsourceRadio.setToggleGroup(group);
 
-        
-        if(statusFld.getText() == "Add"){
-            int idCount = part_inventory.getInventoryItems().size() + 1;
-            idFld.setText(String.valueOf(idCount));
-        }else{
-            nameFld.setText(receivedPart.getName());
-            invFld.setText(String.valueOf(receivedPart.getStock()));
-            minFld.setText(String.valueOf(receivedPart.getMin()));
-            maxFld.setText(String.valueOf(receivedPart.getMax()));
-            priceFld.setText(String.valueOf(receivedPart.getPrice()));
-            idFld.setText(String.valueOf(receivedPart.getId()));
-        }
+        nameFld.setText(receivedPart.getName());
+        invFld.setText(String.valueOf(receivedPart.getStock()));
+        minFld.setText(String.valueOf(receivedPart.getMin()));
+        maxFld.setText(String.valueOf(receivedPart.getMax()));
+        priceFld.setText(String.valueOf(receivedPart.getPrice()));
+        idFld.setText(String.valueOf(receivedPart.getId()));
+
     }
 
     public void handleCloseButtonAction(ActionEvent event) {
