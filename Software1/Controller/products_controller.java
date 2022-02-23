@@ -48,6 +48,21 @@ public class products_controller {
     private TableView<Part> listOfPartsTable;
 
     @FXML
+    private TableColumn<Part, Integer> assocPartIDCol;
+
+    @FXML
+    private TableColumn<Part, String> assocPartNameCol;
+
+    @FXML
+    private TableColumn<Part, Double> assocPartIventoryCol;
+
+    @FXML
+    private TableColumn<Part, Integer> assocPartPriceCol;
+
+    @FXML
+    private TableView<Part> assocPartsTable;
+
+    @FXML
     private void initialize() throws IOException {
 
 
@@ -58,6 +73,8 @@ public class products_controller {
             priceFld.setText(String.valueOf(receivedProduct.getPrice()));
             idFld.setText(String.valueOf(receivedProduct.getId()));
 
+            
+
             ObservableList<Part> allParts = receivedParts;
 
             listOfPartsTable.setItems(allParts);
@@ -65,6 +82,13 @@ public class products_controller {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
             partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
             partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+            ObservableList<Part> assocaitedParts = receivedProduct.getAllAssociatedParts();
+            assocPartsTable.setItems(assocaitedParts);
+            assocPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            assocPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            assocPartIventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            assocPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
     
