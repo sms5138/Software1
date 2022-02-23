@@ -192,7 +192,9 @@ public class main_controller {
             // Pass the data
             Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
-            products_controller.ReceiveIncomingData(selectedPart, selectedIndex);
+            // ObservableList<Part> PartsTableData = part_inventory.getInventoryItems();
+            products_controller.ReceiveIncomingData(selectedPart, selectedIndex, part_inventory.getInventoryItems());
+            
 
             // Load Parts UI
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products.fxml"));
