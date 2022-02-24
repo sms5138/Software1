@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Software1.Controller.parts_add_controller">
+   <children>
+      <Button fx:id="saveBtn" layoutX="292.0" layoutY="484.0" mnemonicParsing="false" onAction="#saveModifyData" text="Save" />
+      <Button fx:id="cancelBtn" layoutX="287.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Cancel" />
+
+      <Label layoutX="14.0" layoutY="14.0" text="Parts Menu" />
+      <Label layoutX="205.0" layoutY="163.0" text="ID:" />
+      <Label layoutX="187.0" layoutY="210.0" text="Name:" />
+      <Label layoutX="203.0" layoutY="255.0" text="Inv:" />
+      <Label layoutX="167.0" layoutY="296.0" text="Price/Cost:" />
+      <Label layoutX="199.0" layoutY="340.0" text="Max:" />
+      <Label layoutX="199.0" layoutY="388.0" text="Min:" />
+      <Label fx:id="inhouseOutsourceLbl" layoutX="162.0" layoutY="437.0" text="Machine ID:" />
+      <Label layoutX="14.0" layoutY="38.0" text="Mode:" />
+      <Label fx:id="statusFld" layoutX="58.0" layoutY="38.0" text="" />
+
+
+      <RadioButton fx:id="inhouseRadio" onAction="#checkInhouseOutsource" layoutX="207.0" layoutY="103.0" mnemonicParsing="false" selected="true" text="In-House" />
+      <RadioButton fx:id="outsourceRadio" onAction="#checkInhouseOutsource" layoutX="333.0" layoutY="103.0" mnemonicParsing="false" text="Outsourced" />
+
+      <TextField fx:id="idFld" disable="true" layoutX="253.0" layoutY="159.0" promptText="Auto  Generated - Disabled" />
+      <TextField fx:id="nameFld" layoutX="253.0" layoutY="206.0" promptText="Name" />
+      <TextField fx:id="invFld" layoutX="253.0" layoutY="251.0" promptText="10" />
+      <TextField fx:id="priceFld" layoutX="253.0" layoutY="292.0" promptText="1.50" />
+      <TextField fx:id="maxFld" layoutX="253.0" layoutY="336.0" promptText="100" />
+      <TextField fx:id="minFld" layoutX="253.0" layoutY="383.0" promptText="5" />
+      <TextField fx:id="machineIDFld" layoutX="251.0" layoutY="433.0" promptText="MachineID" />
+   </children>
+</Pane>

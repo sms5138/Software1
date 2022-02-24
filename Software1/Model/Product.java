@@ -1,14 +1,14 @@
 package Software1.Model;
 
-/*
- * Supplied class Part.java 
- */
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /*
  *
  * @author Sean Sawyer
  */
 public abstract class Product {
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;
@@ -106,6 +106,14 @@ public abstract class Product {
      */
     public void setMax(int max) {
         this.max = max;
+    }
+
+    public ObservableList<Part> getAllAssociatedParts(){
+        return this.associatedParts;
+    }
+
+    public void addAssociatedParts(Part partToAdd){
+        this.associatedParts.add(partToAdd);
     }
     
 }

@@ -9,7 +9,20 @@ public class product_outsource extends Product{
             this.name = outsource_name;
         }
     
+
+        /**
+         * 
+         * @return the name
+         */
         public String getName(){
             return name;
+        }
+
+        /**
+         *  The name to be set
+         * @param
+         */
+        public void setName(String name){
+            this.name = name;
         }
 }
