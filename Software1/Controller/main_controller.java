@@ -99,7 +99,7 @@ public class main_controller {
         testDataName = "testInhouseProduct";
         id_number = timeInt + testDataName.length();
         product_inhouse test2 = new product_inhouse(id_number, "testInhouseProduct", 3.5, 150, 2, 20, 62);
-        test2.addAssociatedParts(test0);
+        // test2.addAssociatedParts(test0);
         product_inventory.addInventoryItems(test2);
 
         timeInt = (int) (new Date().getTime()/1000);
@@ -115,6 +115,8 @@ public class main_controller {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        
     }
 
     public void addPartsClick() throws IOException{
@@ -194,6 +196,7 @@ public class main_controller {
             // Pass the data
             Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
             int selectedIndex = productsTable.getSelectionModel().getSelectedIndex();
+            System.out.println(selectedPart.getAllAssociatedParts());
             // ObservableList<Part> PartsTableData = part_inventory.getAllParts();
             products_controller.ReceiveIncomingData(selectedPart, selectedIndex, Inventory.getAllParts());
             

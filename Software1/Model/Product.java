@@ -1,5 +1,6 @@
 package Software1.Model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /*
@@ -11,7 +12,7 @@ import javafx.collections.ObservableList;
  * @author Sean Sawyer
  */
 public abstract class Product {
-    private ObservableList<Part> associatedParts;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;
@@ -112,12 +113,11 @@ public abstract class Product {
     }
 
     public ObservableList<Part> getAllAssociatedParts(){
-        return associatedParts;
+        return this.associatedParts;
     }
 
     public void addAssociatedParts(Part partToAdd){
-        // part_inhouse TestPartToAdd = new part_inhouse(123, "testInhousePart", 1.50, 100, 5, 10, 2);
-        // this.associatedParts.add(TestPartToAdd);
+        this.associatedParts.add(partToAdd);
     }
     
 }

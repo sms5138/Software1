@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 public class products_controller {
     public Button cancelBtn;
+    public Button removeAssocPartBtn;
+    public Button addAssocPartBtn;
     public Label statusFld;
     public TextField idFld;
     public TextField nameFld;
@@ -107,4 +109,17 @@ public class products_controller {
         statusFld.setText(mode);
     }
 
+    public void addAssocPart(){
+        if (listOfPartsTable.getSelectionModel().getSelectedItem() != null) {
+            Part selectedPart = listOfPartsTable.getSelectionModel().getSelectedItem();
+            receivedProduct.addAssociatedParts(selectedPart);
+        }
+    }
+
+    public void removeAssociatedPart(){
+        if (assocPartsTable.getSelectionModel().getSelectedItem() != null) {
+            Part selectedPart = assocPartsTable.getSelectionModel().getSelectedItem();
+            assocPartsTable.getItems().removeAll(selectedPart);
+        }
+    }
 }
