@@ -115,9 +115,9 @@ public abstract class Product {
         return associatedParts;
     }
 
-    public void addAssociatedParts(){
-        part_inhouse TestPartToAdd = new part_inhouse(123, "testInhousePart", 1.50, 100, 5, 10, 2);
-        this.associatedParts.add(TestPartToAdd);
+    public void addAssociatedParts(Part partToAdd){
+        // part_inhouse TestPartToAdd = new part_inhouse(123, "testInhousePart", 1.50, 100, 5, 10, 2);
+        // this.associatedParts.add(TestPartToAdd);
     }
     
 }

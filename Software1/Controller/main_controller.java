@@ -99,14 +99,14 @@ public class main_controller {
         testDataName = "testInhouseProduct";
         id_number = timeInt + testDataName.length();
         product_inhouse test2 = new product_inhouse(id_number, "testInhouseProduct", 3.5, 150, 2, 20, 62);
-        test2.addAssociatedParts();
+        test2.addAssociatedParts(test0);
         product_inventory.addInventoryItems(test2);
 
         timeInt = (int) (new Date().getTime()/1000);
         testDataName = "testOutsourceProduct";
         id_number = timeInt + testDataName.length();
         product_outsource test3 = new product_outsource(id_number, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
-        test2.addAssociatedParts();
+        test2.addAssociatedParts(test1);
         product_inventory.addInventoryItems(test3);
 
         productsTable.setItems(product_inventory.getAllParts());
