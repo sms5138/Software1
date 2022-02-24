@@ -13,10 +13,6 @@ public class Inventory {
         AllParts.add(parts);
     }
 
-    public static void addProduct(Product productToAdd){
-        AllProducts.add(productToAdd);
-    }
-
     public static int getInventoryIndex(){
         return AllPartsIndex;
     }
@@ -44,5 +40,48 @@ public class Inventory {
         Object[] inventory_array = AllParts.toArray();
         return inventory_array.length;
 
+    }
+
+    public static Part lookupPart(int partID){
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getId() == partID){
+                return partToCheck;
+            }
+        }
+
+        return null;
+
+    }
+
+    public static ObservableList<Part> lookupPart(String partialName){
+        ObservableList<Part> namedPart = FXCollections.observableArrayList();
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getName().contains(partialName)){
+                namedPart.add(partToCheck);
+            }
+        }
+
+
+        return namedPart;
+    }
+
+    public static void addProduct(Product productToAdd){
+        AllProducts.add(productToAdd);
+    }
+
+    public static ObservableList<Product> getAllProducts(){
+        return AllProducts;
+    }
+
+    public static ObservableList<Product> getCurrentProduct(int index){
+        AllProducts.get(index);
+        return AllProducts;
     }
 }
