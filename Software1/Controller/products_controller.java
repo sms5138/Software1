@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import Software1.Model.Part;
 import Software1.Model.Product;
-// import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-// import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class products_controller {
@@ -64,6 +62,10 @@ public class products_controller {
     @FXML
     private TableView<Part> assocPartsTable;
 
+    /**
+     * This sets up the UI for the user to modify a product.
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
 
@@ -94,21 +96,38 @@ public class products_controller {
 
     }
     
+    /**
+     * This receives incoming part and product information.
+     * @param passedProduct
+     * @param passedIndex
+     * @param passedParts
+     */
     public static void ReceiveIncomingData(Product passedProduct, int passedIndex, ObservableList<Part> passedParts){
         receivedProduct = passedProduct;
         receivedIndex = passedIndex;
         receivedParts = passedParts;
     }
 
+    /**
+     * This closes the window and takes the user back to the main UI.
+     * @param event
+     */
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * This sets the mode of the GUI to Add, which would be planned for future development, and lets the user know what function they are currently working on.
+     * @param mode
+     */
     public void setMode(String mode){
         statusFld.setText(mode);
     }
 
+    /**
+     * Adds the part to the product that is being modified.
+     */
     public void addAssocPart(){
         if (listOfPartsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = listOfPartsTable.getSelectionModel().getSelectedItem();
@@ -116,6 +135,9 @@ public class products_controller {
         }
     }
 
+    /**
+     * Removes the selected part from the product.
+     */
     public void removeAssociatedPart(){
         if (assocPartsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = assocPartsTable.getSelectionModel().getSelectedItem();

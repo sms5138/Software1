@@ -74,6 +74,10 @@ public class main_controller {
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
+    /**
+     * This is used to setup the test data, and populate the tables with the test data.
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
         int timeInt = (int) (new Date().getTime()/1000);
@@ -119,6 +123,10 @@ public class main_controller {
         
     }
 
+    /**
+     * This is used to open up parts_add.fxml and opens the GUI where parts can be created.
+     * @throws IOException
+     */
     public void addPartsClick() throws IOException{
         // Pass the click type to the `parts.fxml`
         String mode = "Add";
@@ -135,6 +143,10 @@ public class main_controller {
         stage.show();
     }
 
+    /**
+     * This method captures the selected row from the parts table and passes it to the parts.fxml GUI where parts can be modified.
+     * @throws IOException
+     */
     public void modifyPartsClick() throws IOException{
 
         String mode = "Modify";
@@ -171,6 +183,10 @@ public class main_controller {
         }
     }
 
+    /**
+     * This is used to open up products_add.fxml and opens the GUI where products can be created. 
+     * @throws IOException
+     */
     public void addProductsClick() throws IOException{
         // Pass the click type to the `parts.fxml`
         String mode = "Add";
@@ -187,6 +203,10 @@ public class main_controller {
         stage.show();
     }
 
+    /**
+     * This method captures the selected row from the product table and passes it to the products.fxml GUI where products can be modified.
+     * @throws IOException
+     */
     public void modifyProductsClick() throws IOException{
         String mode = "Modify";
         
@@ -225,11 +245,17 @@ public class main_controller {
         }
     }
 
+    /**
+     * This is used to close the application.
+     */
     public void mainFormExit(){
         final Stage stage = (Stage) mainFormExit.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * This is used to delete a part from the Inventory
+     */
     public void deletePart(){
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
@@ -237,6 +263,9 @@ public class main_controller {
         }
     }
 
+    /**
+     * This is used to delete a product from the Inventory.
+     */
     public void deleteProd(){
         if (productsTable.getSelectionModel().getSelectedItem() != null) {
             Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
@@ -245,6 +274,11 @@ public class main_controller {
     }
 
 
+    /**
+     * This is used to take the name of a part and search the inventory for it.
+     * @param partialName
+     * @return
+     */
     private ObservableList<Part> searchByPartName(String partialName){
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
 
@@ -261,7 +295,11 @@ public class main_controller {
         return namedPart;
     }
 
-
+    /**
+     * This is used to take the ID of a part and search the inventory for it.
+     * @param partID
+     * @return
+     */
     private Part getPartById(int partID){
         ObservableList<Part> allParts = Inventory.getAllParts();
 
@@ -279,6 +317,10 @@ public class main_controller {
         return null;
     }
 
+    /**
+     * This preforms the parts search by searching either by name or id for a part.
+     * @param actionEvent
+     */
     public void partSearch(ActionEvent actionEvent){
         String search = partSearchFld.getText();
 
@@ -297,17 +339,18 @@ public class main_controller {
             catch(NumberFormatException e){
                 // ignore...
             }
-
         }
-
         partsTable.setItems(partsSearch);
         partSearchFld.setText("");
-
     }
 
 
 
-
+    /**
+     * This takes the name of the product and searches the current list of products for its existence.
+     * @param partialName
+     * @return
+     */
     private ObservableList<Product> searchByProdName(String partialName){
         ObservableList<Product> namedPart = FXCollections.observableArrayList();
 
@@ -324,6 +367,11 @@ public class main_controller {
         return namedPart;
     }
 
+    /**
+     * This is used to take the ID of a product and search the inventory for it.
+     * @param prodID
+     * @return
+     */
     private Product getProdById(int prodID){
         ObservableList<Product> allProds = Inventory.getAllProducts();
 
@@ -341,6 +389,10 @@ public class main_controller {
         return null;
     }
 
+    /**
+     * This preforms the product search by searching either by name or id for a part.
+     * @param actionEvent
+     */
     public void prodSearch(ActionEvent actionEvent){
         String search = prodSearchFld.getText();
 
@@ -361,12 +413,7 @@ public class main_controller {
             }
 
         }
-
         productsTable.setItems(prodSearch);
         prodSearchFld.setText("");
-
     }
-
-
-
 }

@@ -32,11 +32,20 @@ public class parts_controller {
 
     public static int receivedIndex;
 
+    /**
+     * This receives parts information being passed from the main UI
+     * @param passedPart
+     * @param passedIndex
+     */
     public static void ReceiveIncomingData(Part passedPart, int passedIndex){
         receivedPart = passedPart;
         receivedIndex = passedIndex;
     }
 
+    /**
+     * This sets up the UI for the user so they can modify the data.
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
         // Create group for toggle buttons
@@ -54,15 +63,28 @@ public class parts_controller {
 
     }
 
+    /**
+     * This closes the UI and goes back to the main UI.
+     * @param event
+     */
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * This closes the Parts modify window.
+     * @param mode
+     */
     public void setMode(String mode){
         statusFld.setText(mode);
     }
 
+    /**
+     * This saves the modified data.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void saveModifyData() throws IOException, InterruptedException{
             System.out.println("modifying data...");
 
@@ -89,9 +111,5 @@ public class parts_controller {
             alert.setContentText(e + " is not an acceptable value for the text field. Please update the value and try again.");
             alert.showAndWait();
         }
-
-
     }
-
-    
 }

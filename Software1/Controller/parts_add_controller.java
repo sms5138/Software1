@@ -32,7 +32,11 @@ public class parts_add_controller {
     public RadioButton outsourceRadio;
 
 
-
+    /**
+     * This sets up the radio button groups and captures the time stamp. 
+     * It converts the timestampt to an int which will be used as the id when the part is created.
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
         // Create group for toggle buttons
@@ -46,16 +50,26 @@ public class parts_add_controller {
 
     }
 
+    /**
+     * This closes the Parts Add window.
+     * @param event
+     */
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * This sets the mode of the GUI to Add, which would be planned for future development, and lets the user know what function they are currently working on.
+     * @param mode
+     */
     public void setMode(String mode){
         statusFld.setText(mode);
     }
 
-
+    /**
+     * This sets the machineIDFld UI element text to either 'Machine ID' or 'Company Name:' depending on if inhouse or outsource is used.
+     */
     public void checkInhouseOutsource(){
         if(inhouseRadio.isSelected()){
             inhouseOutsourceLbl.setText("Machine ID:");
@@ -69,6 +83,12 @@ public class parts_add_controller {
         }
     }
 
+    /**
+     * This saves the data once the information is completely filled out.
+     * @param event
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void saveModifyData(ActionEvent event) throws IOException, InterruptedException{
 
             System.out.println("adding new part");
@@ -119,26 +139,5 @@ public class parts_add_controller {
                 }
 
             }
-            // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/prompt.fxml"));
-            // Parent root1 = (Parent) fxmlLoader.load();
-            
-            // prompt_controller controller = fxmlLoader.<prompt_controller>getController();
-            // controller.setStatus("Part Added", "Your part has been added.");
-            
-            // Stage stage = new Stage();
-            // stage.initModality(Modality.APPLICATION_MODAL);
-            // stage.initStyle(StageStyle.UNDECORATED);
-            // stage.setScene(new Scene(root1)); 
-            // stage.setResizable(false);   
-            // stage.show();
-            
-            // int idCount = (int) (new Date().getTime()/1000);
-            // idFld.setText(String.valueOf(idCount));
-
-            // Stage stageCurrent = (Stage) saveBtn.getScene().getWindow();
-            // stageCurrent.close();
-        
     }
-
-    
 }

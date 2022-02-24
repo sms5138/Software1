@@ -4,10 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /*
- * Supplied class Part.java 
- */
-
-/*
  *
  * @author Sean Sawyer
  */

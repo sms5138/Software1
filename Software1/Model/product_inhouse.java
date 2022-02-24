@@ -9,8 +9,19 @@ public class product_inhouse extends Product{
             this.inhouse_id = inhouse_id;
         }
     
+        /**
+         * 
+         * @return the inhouse_id
+         */
         public int GetInhouseID(){
-    
             return inhouse_id;
+        }
+
+        /**
+         * 
+         * @param inhouseID the inhouse_id to be set
+         */
+        public void SetInhouseID(int inhouseID){
+            this.inhouse_id = inhouseID;
         }
 }

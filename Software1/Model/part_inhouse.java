@@ -10,11 +10,18 @@ public class part_inhouse extends Part{
         this.machineID = machineID;
     }
 
+    /**
+     * 
+     * @return the machineID
+     */
     public int getMachineID(){
-
         return machineID;
     }
     
+    /**
+     * 
+     * @param machineID the machineID to set
+     */
     public void setMachineID(int machineID) {
         this.machineID = machineID;
     }

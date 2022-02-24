@@ -3,18 +3,26 @@ package Software1.Model;
 public class part_outsource extends Part{
 
     // this overrides the name from the Part model being used.
-    private String comapnyName;
+    private String companyName;
 
-    public part_outsource(int id, String name, double price, int stock, int min, int max, String comapnyName) {
+    public part_outsource(int id, String name, double price, int stock, int min, int max, String companyName) {
         super(id, name, price, stock, min, max);
-        this.comapnyName = comapnyName;
+        this.companyName = companyName;
     }
 
+    /**
+     * 
+     * @return the companyName
+     */
     public String getComapnyName(){
-        return comapnyName;
+        return companyName;
     }
     
-    public void setCompanyName(String comapnyName) {
-        this.comapnyName = comapnyName;
+    /**
+     * 
+     * @param companyName the companyName to set
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }
