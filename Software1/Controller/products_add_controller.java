@@ -23,6 +23,7 @@ public class products_add_controller {
     public Button cancelBtn;
     public Button removeAssocPartBtn;
     public Button addAssocPartBtn;
+    public Button SearchBtn;
     public Label statusFld;
     public TextField idFld;
     public TextField nameFld;
@@ -31,6 +32,7 @@ public class products_add_controller {
     public TextField minFld;
     public TextField maxFld;
     public TextField machineIDFld;
+    public TextField SearchFld;
     public static ObservableList<Part> receivedParts;
     public static Product newlyCreatedProduct;
     ObservableList<Part> assocaitedParts = FXCollections.observableArrayList();
@@ -147,26 +149,96 @@ public class products_add_controller {
     public void saveModifyData() throws IOException, InterruptedException{
         System.out.println("saving data...");
 
-    try{
+        try{
 
-        Product NewProduct = new Product(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText())){};
-        NewProduct.getAllAssociatedParts().setAll(assocaitedParts);
+            Product NewProduct = new Product(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText())){};
+            NewProduct.getAllAssociatedParts().setAll(assocaitedParts);
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("New Product Created...");
-        confirm.setContentText("Your part has been created...");
-        confirm.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("New Product Created...");
+            confirm.setContentText("Your part has been created...");
+            confirm.showAndWait();
 
-        // update selected object
-        Inventory.addProduct(NewProduct);
-        newlyCreatedProduct = NewProduct;
+            // update selected object
+            Inventory.addProduct(NewProduct);
+            newlyCreatedProduct = NewProduct;
+        }
+        catch(NumberFormatException e){
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("An Error has occured...");
+            alert.setContentText(e + " is not an acceptable value for the text field. Please update the value and try again.");
+            alert.showAndWait();
+        }
     }
-    catch(NumberFormatException e){
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("An Error has occured...");
-        alert.setContentText(e + " is not an acceptable value for the text field. Please update the value and try again.");
-        alert.showAndWait();
+        /**
+     * This is used to take the name of a part and search the inventory for it.
+     * @param partialName
+     * @return
+     */
+    private ObservableList<Part> searchByPartName(String partialName){
+        ObservableList<Part> namedPart = FXCollections.observableArrayList();
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getName().contains(partialName)){
+                namedPart.add(partToCheck);
+            }
+        }
+
+
+        return namedPart;
     }
-}
+
+    /**
+     * This is used to take the ID of a part and search the inventory for it.
+     * @param partID
+     * @return
+     */
+    private Part getPartById(int partID){
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        // for(int i = 0; i < allParts.size(); i++){
+
+        // }
+
+        for(Part partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getId() == partID){
+                return partToCheck;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * This preforms the parts search by searching either by name or id for a part.
+     * @param actionEvent
+     */
+    public void partSearch(ActionEvent actionEvent){
+        String search = SearchFld.getText();
+
+        ObservableList<Part> partsSearch = searchByPartName(search);
+
+        if(partsSearch.size() == 0){
+            try{
+                int part_id = Integer.parseInt(search);
+
+                Part searchedByID = getPartById(part_id);
+    
+                if(searchedByID != null){
+                    partsSearch.add(searchedByID);
+                }
+            }
+            catch(NumberFormatException e){
+                // ignore...
+            }
+        }
+        listOfPartsTable.setItems(partsSearch);
+        SearchFld.setText("");
+    }
 }

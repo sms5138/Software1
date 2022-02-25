@@ -42,11 +42,13 @@
       </TableView>
 
       <TextField fx:id="idFld" disable="true" layoutX="131.0" layoutY="170.0" promptText="Auto  Generated - Disabled" />
-      <TextField layoutX="700.0" layoutY="18.0" promptText="Search by ID or Name" />
+
       <TextField fx:id="invFld" layoutX="131.0" layoutY="251.0" />
       <TextField fx:id="priceFld" layoutX="131.0" layoutY="292.0" />
       <TextField fx:id="maxFld" layoutX="131.0" layoutY="336.0" />
       <TextField fx:id="minFld" layoutX="131.0" layoutY="383.0" />
       <TextField fx:id="nameFld" layoutX="131.0" layoutY="212.0" />
+      <TextField fx:id="SearchFld" layoutX="593.0" layoutY="19.0" promptText="Search by ID or Name" />
+      <Button fx:id="SearchBtn" layoutX="778.0" layoutY="19.0" mnemonicParsing="false" onAction="#partSearch" text="Search" />
    </children>
 </Pane>
