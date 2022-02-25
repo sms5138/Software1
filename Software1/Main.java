@@ -12,6 +12,10 @@ public class Main extends Application {
 
       /**
        * This initializes the application.
+       * 
+       * RUNTIME ERROR: I ran into an error where the associatedParts observable list kept failing to let the program compile stating that 'this.assocaiatedParts is null'. After digging in I realized that the I forgot to initialize it. Once initialized it worked as expected.
+       * 
+       * FUTURE ENHANCEMENT: Were I to extend the functionality I would incorperate a database as this would allow the data to live in a manner that extended past the time the application is running.
        */
       @Override
       public void start(Stage primaryStage) throws Exception{

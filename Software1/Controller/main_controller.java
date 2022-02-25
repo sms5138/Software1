@@ -191,6 +191,8 @@ public class main_controller {
         // Pass the click type to the `parts.fxml`
         String mode = "Add";
 
+        products_add_controller.ReceiveIncomingData(Inventory.getAllParts());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/products_add.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         products_add_controller controller = fxmlLoader.<products_add_controller>getController();

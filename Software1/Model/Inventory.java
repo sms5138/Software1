@@ -46,9 +46,18 @@ public class Inventory {
      * @param partToRemove
      * @return
      */
-    public static ObservableList<Part> removeParts(Part partToRemove){
-        AllParts.remove(partToRemove);
-        return AllParts;
+    public static boolean deleteParts(Part partToRemove){
+        return AllParts.remove(partToRemove);
+    }
+
+
+    /**
+     * This removes the product from the inventory.
+     * @param partToRemove
+     * @return
+     */
+    public static boolean deleteProduct(Product productToRemove){
+        return AllProducts.remove(productToRemove);
     }
 
     /**
@@ -57,9 +66,8 @@ public class Inventory {
      * @param partToRemove
      * @return
      */
-    public static ObservableList<Part> updateParts(int index, Part partToRemove){
+    public static void updateParts(int index, Part partToRemove){
         AllParts.set(index, partToRemove);
-        return AllParts;
     }
 
     /**
@@ -110,6 +118,10 @@ public class Inventory {
 
 
         return namedPart;
+    }
+
+    public static void updateProduct(int index, Product partToRemove){
+        AllProducts.set(index, partToRemove);
     }
 
     /**

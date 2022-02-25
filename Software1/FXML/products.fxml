@@ -10,7 +10,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Software1.Controller.products_controller">
    <children>
       <Button fx:id='removeAssocPartBtn' layoutX="673.0" layoutY="484.0" mnemonicParsing="false" prefHeight="25.0" onAction='#removeAssociatedPart' prefWidth="160.0" text="Remove Associated Part" />
-      <Button layoutX="292.0" layoutY="525.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id='saveBtn' layoutX="292.0" layoutY="525.0" mnemonicParsing="false" onAction='#saveModifyData' text="Save" />
       <Button fx:id="cancelBtn" layoutX="673.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Cancel" />
       <Button fx:id='addAssocPartBtn' layoutX="785.0" layoutY="251.0" mnemonicParsing="false" onAction='#addAssocPart' text="Add" />
 

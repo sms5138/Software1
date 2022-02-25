@@ -2,11 +2,14 @@ package Software1.Controller;
 
 import java.io.IOException;
 
+import Software1.Model.Inventory;
 import Software1.Model.Part;
 import Software1.Model.Product;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -29,6 +32,7 @@ public class products_controller {
     public TextField machineIDFld;
     public static Product receivedProduct = null;
     public static ObservableList<Part> receivedParts;
+    ObservableList<Part> assocaitedParts = FXCollections.observableArrayList();
 
     public static int receivedIndex;
 
@@ -87,7 +91,9 @@ public class products_controller {
             partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
             partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-            ObservableList<Part> assocaitedParts = receivedProduct.getAllAssociatedParts();
+            
+            assocaitedParts.addAll(receivedProduct.getAllAssociatedParts());
+
             assocPartsTable.setItems(assocaitedParts);
             assocPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
             assocPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -129,9 +135,10 @@ public class products_controller {
      * Adds the part to the product that is being modified.
      */
     public void addAssocPart(){
+
         if (listOfPartsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = listOfPartsTable.getSelectionModel().getSelectedItem();
-            receivedProduct.addAssociatedParts(selectedPart);
+            assocaitedParts.add(selectedPart);
         }
     }
 
@@ -141,7 +148,42 @@ public class products_controller {
     public void removeAssociatedPart(){
         if (assocPartsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = assocPartsTable.getSelectionModel().getSelectedItem();
-            assocPartsTable.getItems().removeAll(selectedPart);
+            assocaitedParts.remove(selectedPart);
         }
     }
+
+    /**
+     * This will allow the modified data to be saved.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public void saveModifyData() throws IOException, InterruptedException{
+        System.out.println("modifying data...");
+
+    try{
+        // set updated values to the object
+        receivedProduct.setStock(Integer.parseInt(invFld.getText()));
+        receivedProduct.setName(nameFld.getText());
+        receivedProduct.setMax(Integer.parseInt(maxFld.getText()));
+        receivedProduct.setMin(Integer.parseInt(minFld.getText()));
+        receivedProduct.setPrice(Double.parseDouble(priceFld.getText()));
+        receivedProduct.getAllAssociatedParts().setAll(assocaitedParts);
+
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("New Part Created...");
+        confirm.setContentText("Your part has been updated...");
+        confirm.showAndWait();
+
+        // update selected object
+        Inventory.updateProduct(receivedIndex, receivedProduct);
+    }
+    catch(NumberFormatException e){
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("An Error has occured...");
+        alert.setContentText(e + " is not an acceptable value for the text field. Please update the value and try again.");
+        alert.showAndWait();
+    }
+}
 }
