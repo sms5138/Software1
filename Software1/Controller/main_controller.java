@@ -9,9 +9,9 @@ import Software1.Model.Product;
 import Software1.Model.part_inhouse;
 import Software1.Model.Inventory;
 import Software1.Model.part_outsource;
-import Software1.Model.product_inhouse;
+// import Software1.Model.product_inhouse;
 // import Software1.Model.product_inventory;
-import Software1.Model.product_outsource;
+// import Software1.Model.product_outsource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +21,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -102,14 +104,14 @@ public class main_controller {
         timeInt = (int) (new Date().getTime()/1000);
         testDataName = "testInhouseProduct";
         id_number = timeInt + testDataName.length();
-        product_inhouse test2 = new product_inhouse(id_number, "testInhouseProduct", 3.5, 150, 2, 20, 62);
+        Product test2 = new Product(id_number, "testInhouseProduct", 3.5, 150, 2, 20){};
         // test2.addAssociatedParts(test0);
         Inventory.addProduct(test2);
 
         timeInt = (int) (new Date().getTime()/1000);
         testDataName = "testOutsourceProduct";
         id_number = timeInt + testDataName.length();
-        product_outsource test3 = new product_outsource(id_number, "testOutsourceProduct", 4.5, 200, 50, 100, "3rdPartyProductName");
+        Product test3 = new Product(id_number, "testOutsourceProduct", 4.5, 200, 50, 100){};
         test2.addAssociatedParts(test1);
         Inventory.addProduct(test3);
 
@@ -259,9 +261,22 @@ public class main_controller {
      * This is used to delete a part from the Inventory
      */
     public void deletePart(){
+        
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
-            partsTable.getItems().removeAll(selectedPart);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Are you sure?");
+            alert.setContentText("You are about to delete " + selectedPart.getName() + ". Do you wish to continue?");
+            ButtonType okButton = new ButtonType("YES", ButtonBar.ButtonData.YES);
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(okButton, cancelButton);
+            alert.showAndWait().ifPresent(type -> {
+                System.out.println("modifying data... " + type.getText());
+            if (type.getText() == "YES") {
+                
+                partsTable.getItems().removeAll(selectedPart);
+            }
+            });
         }
     }
 
@@ -270,8 +285,25 @@ public class main_controller {
      */
     public void deleteProd(){
         if (productsTable.getSelectionModel().getSelectedItem() != null) {
-            Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
+        Product selectedPart = productsTable.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("You are about to delete " + selectedPart.getName() + ". Do you wish to continue?");
+        ButtonType okButton = new ButtonType("YES", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, cancelButton);
+        alert.showAndWait().ifPresent(type -> {
+
+        if (type.getText() == "YES") {
+            
             productsTable.getItems().removeAll(selectedPart);
+        }
+        });
+
+
+
+
         }
     }
 

@@ -108,12 +108,29 @@ public abstract class Product {
         this.max = max;
     }
 
+    /**
+     * 
+     * @return all associated parts for given product
+     */
     public ObservableList<Part> getAllAssociatedParts(){
         return this.associatedParts;
     }
 
+    /**
+     * Adds an associated part to a given product
+     * @param partToAdd
+     */
     public void addAssociatedParts(Part partToAdd){
         this.associatedParts.add(partToAdd);
+    }
+
+    /**
+     * Removes an associated part from a given product
+     * @param selectedAssociatedPart
+     * @return
+     */
+    public boolean deleteAssociatedPart(Part selectedAssociatedPart){
+        return associatedParts.remove(selectedAssociatedPart);
     }
     
 }

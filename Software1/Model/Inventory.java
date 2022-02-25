@@ -24,60 +24,11 @@ public class Inventory {
     }
 
     /**
-     * This provides all the parts in the inventory.
-     * @return
+     * Adds a product to the inventory.
+     * @param productToAdd
      */
-    public static ObservableList<Part> getAllParts(){
-        return AllParts;
-    }
-
-    /**
-     * This returns the part based on its index.
-     * @param index
-     * @return
-     */
-    public static ObservableList<Part> getCurrentItem(int index){
-        AllParts.get(index);
-        return AllParts;
-    }
-
-    /**
-     * This removes the part from the inventory.
-     * @param partToRemove
-     * @return
-     */
-    public static boolean deleteParts(Part partToRemove){
-        return AllParts.remove(partToRemove);
-    }
-
-
-    /**
-     * This removes the product from the inventory.
-     * @param partToRemove
-     * @return
-     */
-    public static boolean deleteProduct(Product productToRemove){
-        return AllProducts.remove(productToRemove);
-    }
-
-    /**
-     * This updates the parts
-     * @param index
-     * @param partToRemove
-     * @return
-     */
-    public static void updateParts(int index, Part partToRemove){
-        AllParts.set(index, partToRemove);
-    }
-
-    /**
-     * Returns the number of items in the parts inventory.
-     * @return
-     */
-    public static int getNumberOfItems(){
-        Object[] inventory_array = AllParts.toArray();
-        return inventory_array.length;
-
+    public static void addProduct(Product productToAdd){
+        AllProducts.add(productToAdd);
     }
 
     /**
@@ -96,7 +47,24 @@ public class Inventory {
         }
 
         return null;
+    }
 
+    /**
+     * This is used to take the ID of a product and search the inventory for it.
+     * @param prodID
+     * @return
+     */
+    public Product lookupProduct(int prodID){
+        ObservableList<Product> allProds = Inventory.getAllProducts();
+
+        for(Product partToCheck : allProds){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getId() == prodID){
+                return partToCheck;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -120,16 +88,71 @@ public class Inventory {
         return namedPart;
     }
 
+    /**
+     * This takes the name of the product and searches the current list of products for its existence.
+     * @param partialName
+     * @return
+     */
+    public ObservableList<Product> lookupProduct(String partialName){
+        ObservableList<Product> namedPart = FXCollections.observableArrayList();
+
+        ObservableList<Product> allParts = Inventory.getAllProducts();
+
+        for(Product partToCheck : allParts){
+            System.out.println("searching object " + partToCheck.getId() + "...");
+            if(partToCheck.getName().contains(partialName)){
+                namedPart.add(partToCheck);
+            }
+        }
+
+
+        return namedPart;
+    }
+
+    /**
+     * This updates the parts
+     * @param index
+     * @param partToRemove
+     * @return
+     */
+    public static void updateParts(int index, Part partToRemove){
+        AllParts.set(index, partToRemove);
+    }
+
+    /**
+     * Updates a product
+     * @param index
+     * @param partToRemove
+     */
     public static void updateProduct(int index, Product partToRemove){
         AllProducts.set(index, partToRemove);
     }
 
     /**
-     * Adds a product to the inventory.
-     * @param productToAdd
+     * This removes the part from the inventory.
+     * @param partToRemove
+     * @return
      */
-    public static void addProduct(Product productToAdd){
-        AllProducts.add(productToAdd);
+    public static boolean deleteParts(Part partToRemove){
+        return AllParts.remove(partToRemove);
+    }
+
+
+    /**
+     * This removes the product from the inventory.
+     * @param partToRemove
+     * @return
+     */
+    public static boolean deleteProduct(Product productToRemove){
+        return AllProducts.remove(productToRemove);
+    }
+
+    /**
+     * This provides all the parts in the inventory.
+     * @return
+     */
+    public static ObservableList<Part> getAllParts(){
+        return AllParts;
     }
 
     /**
@@ -138,6 +161,28 @@ public class Inventory {
      */
     public static ObservableList<Product> getAllProducts(){
         return AllProducts;
+    }
+
+    // Addtional/Not Used
+
+    /**
+     * This returns the part based on its index.
+     * @param index
+     * @return
+     */
+    public static ObservableList<Part> getCurrentItem(int index){
+        AllParts.get(index);
+        return AllParts;
+    }
+
+    /**
+     * Returns the number of items in the parts inventory.
+     * @return
+     */
+    public static int getNumberOfItems(){
+        Object[] inventory_array = AllParts.toArray();
+        return inventory_array.length;
+
     }
 
     /**

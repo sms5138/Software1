@@ -48,11 +48,22 @@ public class parts_controller {
      */
     @FXML
     private void initialize() throws IOException {
+
+        String className = receivedPart.getClass().getSimpleName();
+        System.out.println("receivedPart_className = " + className);
+
         // Create group for toggle buttons
         ToggleGroup group = new ToggleGroup();
         inhouseRadio.setToggleGroup(group);
-        outsourceRadio.setSelected(true);
         outsourceRadio.setToggleGroup(group);
+
+        if(className == "part_outsource"){
+            System.out.println("OutSource");
+            outsourceRadio.setSelected(true);
+        }else{
+            System.out.println("inHouse");
+            inhouseRadio.setSelected(true);
+        }
 
         nameFld.setText(receivedPart.getName());
         invFld.setText(String.valueOf(receivedPart.getStock()));
@@ -60,7 +71,6 @@ public class parts_controller {
         maxFld.setText(String.valueOf(receivedPart.getMax()));
         priceFld.setText(String.valueOf(receivedPart.getPrice()));
         idFld.setText(String.valueOf(receivedPart.getId()));
-
     }
 
     /**
