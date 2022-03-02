@@ -156,8 +156,11 @@ public class main_controller {
         // Determine if there is a selected row, and return error if there is not.
         if (partsTable.getSelectionModel().getSelectedItem() != null) {
             
-            // Pass the data
+
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+
+            // Pass the data
+            
             int selectedIndex = partsTable.getSelectionModel().getSelectedIndex();
             parts_controller.ReceiveIncomingData(selectedPart, selectedIndex);
 

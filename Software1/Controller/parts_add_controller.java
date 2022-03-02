@@ -97,7 +97,7 @@ public class parts_add_controller {
             if(inhouseRadio.isSelected()){
                 try{
                     System.out.println("inhouse part being added."); 
-                    part_inhouse PartToAdd = new part_inhouse(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), 2);
+                    part_inhouse PartToAdd = new part_inhouse(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText()), Integer.parseInt(machineIDFld.getText()));
                     Inventory.addPart(PartToAdd);
 
                     Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -105,8 +105,8 @@ public class parts_add_controller {
                     confirm.setContentText("Your new Inhouse Part has been created...");
                     confirm.showAndWait();
 
-                    int idCount = (int) (new Date().getTime()/1000);
-                    idFld.setText(String.valueOf(idCount));
+                    Stage stage = (Stage) saveBtn.getScene().getWindow();
+                    stage.close();
                 }
                 catch(NumberFormatException e){
 
@@ -114,6 +114,8 @@ public class parts_add_controller {
                     alert.setTitle("An Error has occured...");
                     alert.setContentText("Please enter a valid value for each text field...");
                     alert.showAndWait();
+                    // Stage stage = (Stage) saveBtn.getScene().getWindow();
+                    // stage.close();
                 }
 
             }else{
@@ -127,8 +129,8 @@ public class parts_add_controller {
                     confirm.setContentText("Your new Outsourced Part has been created...");
                     confirm.showAndWait();
     
-                    int idCount = (int) (new Date().getTime()/1000);
-                    idFld.setText(String.valueOf(idCount));
+                    Stage stage = (Stage) saveBtn.getScene().getWindow();
+                    stage.close();
                 }
                 catch(NumberFormatException e){
 
@@ -136,6 +138,8 @@ public class parts_add_controller {
                     alert.setTitle("An Error has occured...");
                     alert.setContentText("Please enter a valid value for " + e + " each text field...");
                     alert.showAndWait();
+                    Stage stage = (Stage) saveBtn.getScene().getWindow();
+                    stage.close();
                 }
 
             }
