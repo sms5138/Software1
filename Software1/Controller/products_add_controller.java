@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 public class products_add_controller {
     public Button cancelBtn;
+    public Button saveBtn;
     public Button removeAssocPartBtn;
     public Button addAssocPartBtn;
     public Button SearchBtn;
@@ -162,6 +163,9 @@ public class products_add_controller {
             // update selected object
             Inventory.addProduct(NewProduct);
             newlyCreatedProduct = NewProduct;
+
+            Stage stage = (Stage) saveBtn.getScene().getWindow();
+            stage.close();
         }
         catch(NumberFormatException e){
 

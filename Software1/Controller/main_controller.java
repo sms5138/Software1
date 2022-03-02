@@ -159,24 +159,6 @@ public class main_controller {
 
             Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
 
-            // // determine if the part is an inhouse or outsourced part by getting class name as string
-            // String className = selectedPart.getClass().getSimpleName();
-            // System.out.println("receivedPart_className = " + className);
-            
-            // // set string to be compared with as 'part_outsource', and create comparisonResult that will return 'true' or 'false'
-            // String compareClass = "part_outsource";
-
-            // boolean comparisonResult = className.equals(compareClass);
-            // System.out.println("comparisonResult = " + comparisonResult);
-
-            // // compare the comparisonResult to 'true', and determine inhouse vs. outsource based on this comparison.
-            // // Then get the correct data, and update the RadioButton to match the type of part.
-            // if(comparisonResult == true){
-            //     System.out.println("UI will be set to Outsourced, and the receivedPart_className = " + className);
-            // }else{
-            //     System.out.println("UI will be set to Inhouse, and the receivedPart_className = " + className);
-            // }
-
             // Pass the data
             
             int selectedIndex = partsTable.getSelectionModel().getSelectedIndex();
