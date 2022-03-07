@@ -138,8 +138,8 @@ public class parts_add_controller {
                     alert.setTitle("An Error has occured...");
                     alert.setContentText("Please enter a valid value for " + e + " each text field...");
                     alert.showAndWait();
-                    Stage stage = (Stage) saveBtn.getScene().getWindow();
-                    stage.close();
+                    // Stage stage = (Stage) saveBtn.getScene().getWindow();
+                    // stage.close();
                 }
 
             }
