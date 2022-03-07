@@ -299,8 +299,17 @@ public class main_controller {
         alert.showAndWait().ifPresent(type -> {
 
         if (type.getText() == "YES") {
+            if(selectedPart.getAllAssociatedParts().isEmpty() == true){
+                productsTable.getItems().removeAll(selectedPart);
+            }else{
+                // Part assocaiatedPartsLength = (Part) selectedPart.getAllAssociatedParts();
+                System.out.println(selectedPart.getAllAssociatedParts());
+                Alert warn = new Alert(Alert.AlertType.WARNING);
+                warn.setTitle("Cannot delete product...");
+                warn.setContentText("You cannot delete a product that has associated parts... " );
+                warn.showAndWait();
+            }
             
-            productsTable.getItems().removeAll(selectedPart);
         }
         });
 
