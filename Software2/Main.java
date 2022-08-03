@@ -1,4 +1,4 @@
-package Software1;
+package Software2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

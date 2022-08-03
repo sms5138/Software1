@@ -1,10 +1,11 @@
-package Software1.Controller;
+package Software2.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 
-import Software1.Model.Inventory;
-import Software1.Model.Part;
-import Software1.Model.Product;
+import Software2.Model.Inventory;
+import Software2.Model.Part;
+import Software2.Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class products_controller {
+public class products_add_controller {
     public Button cancelBtn;
     public Button saveBtn;
     public Button removeAssocPartBtn;
@@ -33,11 +34,10 @@ public class products_controller {
     public TextField maxFld;
     public TextField machineIDFld;
     public TextField SearchFld;
-    public static Product receivedProduct = null;
     public static ObservableList<Part> receivedParts;
+    public static Product newlyCreatedProduct;
     ObservableList<Part> assocaitedParts = FXCollections.observableArrayList();
 
-    public static int receivedIndex;
 
     @FXML
     private TableColumn<Part, Integer> partIDCol;
@@ -76,15 +76,8 @@ public class products_controller {
     @FXML
     private void initialize() throws IOException {
 
-
-            nameFld.setText(receivedProduct.getName());
-            invFld.setText(String.valueOf(receivedProduct.getStock()));
-            minFld.setText(String.valueOf(receivedProduct.getMin()));
-            maxFld.setText(String.valueOf(receivedProduct.getMax()));
-            priceFld.setText(String.valueOf(receivedProduct.getPrice()));
-            idFld.setText(String.valueOf(receivedProduct.getId()));
-
-            
+        int idCount = (int) (new Date().getTime()/1000);
+        idFld.setText(String.valueOf(idCount));
 
             ObservableList<Part> allParts = receivedParts;
 
@@ -94,8 +87,6 @@ public class products_controller {
             partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
             partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-            
-            assocaitedParts.addAll(receivedProduct.getAllAssociatedParts());
 
             assocPartsTable.setItems(assocaitedParts);
             assocPartIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -107,13 +98,10 @@ public class products_controller {
     
     /**
      * This receives incoming part and product information.
-     * @param passedProduct
-     * @param passedIndex
      * @param passedParts
      */
-    public static void ReceiveIncomingData(Product passedProduct, int passedIndex, ObservableList<Part> passedParts){
-        receivedProduct = passedProduct;
-        receivedIndex = passedIndex;
+    public static void ReceiveIncomingData(ObservableList<Part> passedParts){
+
         receivedParts = passedParts;
     }
 
@@ -138,7 +126,6 @@ public class products_controller {
      * Adds the part to the product that is being modified.
      */
     public void addAssocPart(){
-
         if (listOfPartsTable.getSelectionModel().getSelectedItem() != null) {
             Part selectedPart = listOfPartsTable.getSelectionModel().getSelectedItem();
             assocaitedParts.add(selectedPart);
@@ -161,26 +148,21 @@ public class products_controller {
      * @throws InterruptedException
      */
     public void saveModifyData() throws IOException, InterruptedException{
-        System.out.println("modifying data...");
+        System.out.println("saving data...");
 
         try{
-            // set updated values to the object
-            receivedProduct.setStock(Integer.parseInt(invFld.getText()));
-            receivedProduct.setName(nameFld.getText());
-            receivedProduct.setMax(Integer.parseInt(maxFld.getText()));
-            receivedProduct.setMin(Integer.parseInt(minFld.getText()));
-            receivedProduct.setPrice(Double.parseDouble(priceFld.getText()));
-            receivedProduct.getAllAssociatedParts().setAll(assocaitedParts);
 
+            Product NewProduct = new Product(Integer.parseInt(idFld.getText()), nameFld.getText(), Double.parseDouble(priceFld.getText()), Integer.parseInt(invFld.getText()), Integer.parseInt(minFld.getText()), Integer.parseInt(maxFld.getText())){};
+            NewProduct.getAllAssociatedParts().setAll(assocaitedParts);
 
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("New Part Created...");
-            confirm.setContentText("Your part has been updated...");
+            confirm.setTitle("New Product Created...");
+            confirm.setContentText("Your part has been created...");
             confirm.showAndWait();
 
             // update selected object
-            Inventory.updateProduct(receivedIndex, receivedProduct);
-
+            Inventory.addProduct(NewProduct);
+            newlyCreatedProduct = NewProduct;
 
             Stage stage = (Stage) saveBtn.getScene().getWindow();
             stage.close();
@@ -194,7 +176,7 @@ public class products_controller {
         }
     }
 
-    /**
+        /**
      * This is used to take the name of a part and search the inventory for it.
      * @param partialName
      * @return
@@ -263,4 +245,4 @@ public class products_controller {
         listOfPartsTable.setItems(partsSearch);
         SearchFld.setText("");
     }
-}   
+}

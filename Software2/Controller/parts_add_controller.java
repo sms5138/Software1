@@ -1,11 +1,11 @@
-package Software1.Controller;
+package Software2.Controller;
 
 import java.io.IOException;
 import java.util.Date;
 
-import Software1.Model.part_inhouse;
-import Software1.Model.Inventory;
-import Software1.Model.part_outsource;
+import Software2.Model.Inventory;
+import Software2.Model.part_inhouse;
+import Software2.Model.part_outsource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

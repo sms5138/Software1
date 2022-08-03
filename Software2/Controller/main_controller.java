@@ -1,17 +1,16 @@
-package Software1.Controller;
+package Software2.Controller;
 
 import java.io.IOException;
 import java.util.Date;
 
-//import Software1.Main;
-import Software1.Model.Part;
-import Software1.Model.Product;
-import Software1.Model.part_inhouse;
-import Software1.Model.Inventory;
-import Software1.Model.part_outsource;
-// import Software1.Model.product_inhouse;
-// import Software1.Model.product_inventory;
-// import Software1.Model.product_outsource;
+import Software2.Model.Inventory;
+import Software2.Model.Part;
+import Software2.Model.Product;
+import Software2.Model.part_inhouse;
+import Software2.Model.part_outsource;
+// import Software2.Model.product_inhouse;
+// import Software2.Model.product_inventory;
+// import Software2.Model.product_outsource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

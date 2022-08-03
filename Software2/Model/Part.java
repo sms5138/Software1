@@ -1,4 +1,4 @@
-package Software1.Model;
+package Software2.Model;
 
 /**
  * Supplied class Part.java 

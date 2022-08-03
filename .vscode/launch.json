@@ -9,7 +9,7 @@
             "name": "Launch Main",
             "request": "launch",
             "vmArgs": "--module-path /Users/seansawyer/Documents/javafx-sdk-17.0.0.1/lib --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "Software1.Main",
+            "mainClass": "Software2.Main",
             "projectName": "Software1_46457112"
         },
         {
